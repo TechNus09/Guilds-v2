@@ -2,16 +2,14 @@ import os
 import asyncio
 import discord as d
 from discord.ext import commands
+from discord.utils import get
 import random
 from datetime import date
 from urllib.request import Request, urlopen
 import json
 
-
-
 skill = ['','-mining', '-smithing', '-woodcutting', '-crafting', '-fishing', '-cooking']
-skills = ['combat','mining', 'smithing', 'woodcutting', 'crafting', 'fishing', 'cooking']
-
+skills = ['combat','mining', 'smithing', 'woodcutting', 'crafting', 'fishing', 'cooking','total']
 
 guilds_combat = {}
 guilds_mining = {}
@@ -20,8 +18,6 @@ guilds_woodcutting = {}
 guilds_crafting = {}
 guilds_fishing = {}
 guilds_cooking = {}
-
-
 
 guilds_counter  = {'IMMORTAL': 0, 'OWO': 0, 'EXP': 0, 'BRX': 0, 'RNG': 0, 'LAT': 0, 'KRG': 0, 'GGWP': 0, 'PVM': 0, 'DTF': 0, 'HSR': 0, 'FG': 0, 
                     'NS': 0, 'AOE': 0, 'NSFW': 0, 'DMG': 0, 'AXIAL': 0, 'PAK': 0, 'T62': 0, 'VLR': 0, 'RYU': 0, 'TI': 0, 'NSL': 0, '1HB': 0, 'FFA': 0,
@@ -81,11 +77,11 @@ guilds_counter_total  = {'IMMORTAL': 0, 'OWO': 0, 'EXP': 0, 'BRX': 0, 'RNG': 0, 
                         'RICK': 0, 'ULTR': 0, 'KAMI': 0, 'QUAN': 0, 'FORST': 0, 'DWIKI': 0, 'LBCL': 0, 'EML': 0, 'HUONG': 0, 'AFK': 0, 'NO': 0,
                         'DUCKS': 0, 'XERRA': 0, 'THAT': 0, 'DJ': 0, 'TWO': 0}
 
-guilds_counter_int  = {'IMMORTAL': 0, 'OWO': 9999999999, 'EXP': 56478654, 'BRX': 3546, 'RNG': 8888888888, 'LAT': 7777777777, 'KRG': 0, 'GGWP': 0, 'PVM': 0, 'DTF': 6666666666, 'HSR': 0, 'FG': 0, 
+guilds_counter_int  = {'IMMORTAL': 0, 'OWO': 0, 'EXP': 0, 'BRX': 0, 'RNG': 0, 'LAT': 0, 'KRG': 0, 'GGWP': 0, 'PVM': 0, 'DTF': 0, 'HSR': 0, 'FG': 0, 
                         'NS': 0, 'AOE': 0, 'NSFW': 0, 'DMG': 0, 'AXIAL': 0, 'PAK': 0, 'T62': 0, 'VLR': 0, 'RYU': 0, 'TI': 0, 'NSL': 0, '1HB': 0, 'FFA': 0,
                         'OG': 0, 'ORAZE': 0, 'BLITZ': 0, 'DTS': 0, 'SOLO': 0, 'BIG': 0, 'TRG': 0, 'CCCP': 0, 'TNT': 0, 'SOW': 0, 'PAPA': 0, 'TH': 0,
                         'EXC': 0, 'PHG': 0, 'SHORN': 0, 'TT': 0, 'UMBRA': 0, 'AK7': 0, 'GG': 0, 'LNH': 0, 'SLP': 0, 'DEAD': 0, 'TCK': 0, 'XP': 0, 
-                        'VN': 0, 'XNW': 0, 'DARK': 0, 'FW': 565656565, 'DAVY': 0, 'DK': 0, 'II': 0, 'RW': 0, 'WG': 0, 'OL': 0, 'GOD': 0, 'YOUNG': 0, 'MAD': 0,
+                        'VN': 0, 'XNW': 0, 'DARK': 0, 'FW': 0, 'DAVY': 0, 'DK': 0, 'II': 0, 'RW': 0, 'WG': 0, 'OL': 0, 'GOD': 0, 'YOUNG': 0, 'MAD': 0,
                         'ORDO': 0, 'LGN': 0, 'STEVE': 0, 'LOST': 0, 'LI': 0, 'GO': 0, 'LOLI': 0, 'PKMN': 0, 'GUN': 0, 'TAZ': 0, 'BH': 0, 'YT': 0,
                         'SYN': 0, 'NINJA': 0, 'ESP': 0, 'DR': 0, 'PK': 0, 'CW': 0, 'XD': 0, 'RS': 0, 'GOLEM': 0, 'IIAMA': 0, 'IL': 0, 'HANSA': 0, 'YAO': 
                         0, 'ST': 0, 'FLO': 0, 'SORRY': 0, 'AEVN': 0, 'MSA': 0, 'TROLL': 0, 'GW': 0, 'AROS': 0, 'GOKU': 0, 'YUZU': 0, 'GEAR': 0, 'IE': 0,
@@ -93,7 +89,7 @@ guilds_counter_int  = {'IMMORTAL': 0, 'OWO': 9999999999, 'EXP': 56478654, 'BRX':
                         'PAPPY': 0, '403': 0, 'KING': 0, 'FOX': 0, 'YSD': 0, 'NN': 0, 'MARIA': 0, 'OLD': 0, 'ROSE': 0, 'JESSA': 0, 'DAZZ': 0, 'SIR': 0,
                         'RP': 0, 'RSM': 0, '  ILY': 0, 'PWN': 0, 'IV': 0, 'VX': 0, 'ROBBY': 0, 'REN': 0, 'SNAKE': 0, 'GOUL': 0, 'FLOS': 0, 'LBX': 0,
                         'DN': 0, 'SG': 0, 'CUTE': 0, 'SUPER': 0, 'ETN': 0, 'BREAD': 0, 'YAMI': 0, 'GREEN': 0, 'VLOK': 0, 'CASH': 0, 'KAYN': 0, 'SV': 0,
-                        'SIAPA': 0, 'KXNG': 0, 'ZERO': 0, 'DIMAS': 0, 'WHO': 0, 'TCM': 5555, 'GLOW': 0, 'LDK': 0, 'LX': 0, 'KELLY': 0, 'JANG': 0, 'OLAZ': 0,
+                        'SIAPA': 0, 'KXNG': 0, 'ZERO': 0, 'DIMAS': 0, 'WHO': 0, 'TCM': 0, 'GLOW': 0, 'LDK': 0, 'LX': 0, 'KELLY': 0, 'JANG': 0, 'OLAZ': 0,
                         'THE': 0, 'DIPS': 0, 'GXB': 0, 'TITIT': 0, 'SMOL': 0, 'NEAL': 0, 'SOS': 0, 'FS': 0, 'R13': 0, 'WC2': 0, 'KENJI': 0, 
                         'AG': 0, 'ZIGG': 0, 'MFJ': 0, 'BLUE': 0, 'YAH': 0, 'BILL': 0, 'VAN': 0, 'SOY': 0, 'WAX': 0, 'FBI': 0, 'DUKE': 0, 'APEX': 0,
                         'OOPSY': 0, 'MEYO': 0, '666': 0, 'DADDY': 0, 'MINER': 0, 'NACHT': 0, 'EISA': 0, 'FRTK': 0, 'RRR': 0, 'FAJNA': 0, 'T2': 0,
@@ -109,9 +105,6 @@ guilds_counter_int  = {'IMMORTAL': 0, 'OWO': 9999999999, 'EXP': 56478654, 'BRX':
                         'AKT': 0, 'TIGER': 0, 'VND': 0, 'SR': 0, 'GA': 0, 'DMN': 0, 'MANG': 0, 'GM': 0, 'WILL': 0, 'GOLD': 0, 'GK': 0, '808': 0,
                         'RICK': 0, 'ULTR': 0, 'KAMI': 0, 'QUAN': 0, 'FORST': 0, 'DWIKI': 0, 'LBCL': 0, 'EML': 0, 'HUONG': 0, 'AFK': 0, 'NO': 0,
                         'DUCKS': 0, 'XERRA': 0, 'THAT': 0, 'DJ': 0, 'TWO': 0}
-
-#############################################################################
-
 
 def DictToList (dictio,listo):
     listo.clear()
@@ -170,7 +163,7 @@ def search(skill_name):
     DictToList(temp_guilds,list_guilds_stred)
     
     mini_list = []
-    for i in range(5):
+    for i in range(len(list_guilds_stred)):
         mini_list.append(list_guilds_stred[i])
     list_guilds_stred.clear()
     temp_guilds = ResetDict(guilds_counter_int)
@@ -206,7 +199,7 @@ def searchTotal():
     DictToList(temp_guilds,list_guilds_total_stred)
         
     mini_list = []
-    for i in range(5):
+    for i in range(list_guilds_total_stred):
             mini_list.append(list_guilds_total_stred[i])
     list_guilds_total_stred.clear()
     temp_guilds = ResetDict(guilds_counter_int)
@@ -269,66 +262,191 @@ def LeaderBoard():
             
     return list_lists
 
-
 ############################################################################
 
 client = d.Client()
 client = commands.Bot(command_prefix='!')
 @client.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
+    print('2nd logging in as {0.user}'.format(client))
     await client.change_presence(activity=d.Activity(type=d.ActivityType.playing, name="Dumb Tests"))
 
-
-async def on_message(message):
-    username = str(message.author).split('#')[0]
-    user_message = str(message.content)
-    channel = str(message.channel.name)
-    print(f'{username}: {user_message} ({channel})')
+#@client.event
+#async def on_message(ctx):
+#    username = str(ctx.author).split('#')[0]
+#    user_message = str(ctx.content)
+#    channel = str(ctx.channel)
+#    print(f'{username}: {user_message} ({channel})')
 
 @client.command()
 async def ping(ctx):
     await ctx.send(f"Pong! {round(client.latency * 1000)}ms")
 
 @client.command()
-async def count(ctx,too):
-    message = await ctx.send(f"Counting to {too}")
-    for j in range(1,int(too)+1):
-        await asyncio.sleep(1)
-        await message.edit(content=f"Counting to {too} \n {j}")
-
-@client.command()
-async def PingMe(ctx):
-    channel = client.get_channel(881209385630715904)
-    for i in range(100):
-        await asyncio.sleep(0.25)
-        await channel.send(f"<@{ctx.author.id}>")
-
-@client.command()
 async def hello(ctx):
-    await ctx.send(f"Hello {str(ctx.author).split('#')[0]}!")
+    username = str(ctx.author).split('#')[0]
+    await ctx.send(f"Hello {username}!")
 
 @client.command()
 async def wussup(ctx):
-    await ctx.send(f"Nothing much, hbu {str(ctx.author).split('#')[0]} ?") 
+    username = str(ctx.author).split('#')[0]
+    await ctx.send(f"Nothing much, hbu {username} ?")
 
 @client.command()
 async def bye(ctx):
-    await ctx.send(f"See you later {str(ctx.author).split('#')[0]}!")
+    username = str(ctx.author).split('#')[0]
+    await ctx.send(f"See you later {username}!")
 
 @client.command()
-async def random1m(ctx):
-    response = f"random number between (0 ; 1,000,000): {random.randrange(1000000)}"
-    await ctx.send(response)
+async def bestguild(ctx):
+    await ctx.send(f"OwO Numba Wan !")
 
 @client.command()
+async def RandomNumber(ctx,user_number):
+    await ctx.send(f'{random.randrange(int(user_number))}')
+
+@client.command(name='dc',aliases=['disconnect','logout'])
 async def dc(ctx):
     await client.logout()
 
 @client.command()
-async def datenow(ctx):
+async def today(ctx):
     d1 = date.today().strftime("%d/%m/%Y")
     await ctx.send(f'Today is : {d1}')
+
+
+@client.command(name='combat',aliases=['melee','sw'])
+async def combat(ctx,rank):
+    if ((int(rank)<=0) or (int(rank)>75)):
+        await ctx.send("Ranks must be between 1 and 25")
+    else:
+        await ctx.send("Fetching Combat Data ... ")
+    test_list_1 = search("")
+    embedVar1 = d.Embed(title="Top Guilds: Combat", color=0x669999)
+    for i in range(int(rank)):
+        embedVar1.add_field(name=rankk(i+1), value= test_list_1[i] , inline=False)
+    await ctx.send(embed=embedVar1)
+    test_list_1.clear()
+
+@client.command(name='mining',aliases=['mine','rocky','pick'])
+async def mining(ctx,rank):
+    if ((int(rank)<=0) or (int(rank)>75)):
+        await ctx.send("Ranks must be between 1 and 25")
+    else:
+        await ctx.send("Fetching Mining Data ... ")
+        test_list_2 = search("-mining")
+        embedVar2 = d.Embed(title="Top Guilds: Mining", color=0x333300)
+        for i in range(int(rank)):
+            embedVar2.add_field(name=rankk(i+1), value= test_list_2[i] , inline=False)
+        await ctx.send(embed=embedVar2)
+        test_list_2.clear()
+
+@client.command(name='smithing',aliases=['smith','ember','hammer','kreiger'])
+async def smithing(ctx,rank):
+    if ((int(rank)<=0) or (int(rank)>75)):
+        await ctx.send("Ranks must be between 1 and 25")
+    else:
+        await ctx.send("Fetching Smithing Data ... ")
+        test_list_3 = search("-smithing")
+        embedVar3 = d.Embed(title="Top Guilds: Smithing", color=0xff0000)
+        for i in range(int(rank)):
+            embedVar3.add_field(name=rankk(i+1), value= test_list_3[i] , inline=False)
+        await ctx.send(embed=embedVar3)
+        test_list_3.clear()
+
+@client.command(name='woodcutting',aliases=['wc','pecker','axe','matt'])
+async def woodcutting(ctx,rank):
+    if ((int(rank)<=0) or (int(rank)>75)):
+        await ctx.send("Ranks must be between 1 and 25")
+    else:
+        await ctx.send("Fetching Woodcutting Data ... ")
+        test_list_4 = search("-woodcutting")
+        embedVar4 = d.Embed(title="Top Guilds: Woodcutting", color=0x00cc00)
+        for i in range(int(rank)):
+            embedVar4.add_field(name=rankk(i+1), value= test_list_4[i] , inline=False)
+        await ctx.send(embed=embedVar4)
+        test_list_4.clear()
+
+@client.command(name='crafting',aliases=['craft','woody','yekzer'])
+async def crafting(ctx,rank):
+    if ((int(rank)<=0) or (int(rank)>75)):
+        await ctx.send("Ranks must be between 1 and 25")
+    else:
+        await ctx.send("Fetching Crafting Data ... ")
+        test_list_5 = search("-crafting")
+        embedVar5 = d.Embed(title="Top Guilds: Crafting", color=0x996633)
+        for i in range(int(rank)):
+            embedVar5.add_field(name=rankk(i+1), value= test_list_5[i] , inline=False)
+        await ctx.send(embed=embedVar5)
+        test_list_5.clear()
+
+@client.command(name='fishing',aliases=['fish','tantrid','tant'])
+async def fishing(ctx,rank):
+    if ((int(rank)<=0) or (int(rank)>75)):
+        await ctx.send("Ranks must be between 1 and 25")
+    else:
+        await ctx.send("Fetching Fishing Data ... ")
+        test_list_6 = search("-fishing")
+        embedVar6 = d.Embed(title="Top Guilds: Fishing", color=0x0066ff)
+        for i in range(int(rank)):
+            embedVar6.add_field(name=rankk(i+1), value= test_list_6[i] , inline=False)
+        await ctx.send(embed=embedVar6)
+        test_list_6.clear()
+
+@client.command(name='cooking',aliases=['cook','food'])
+async def cooking(ctx,rank):
+    if ((int(rank)<=0) or (int(rank)>75)):
+        await ctx.send("Ranks must be between 1 and 25")
+    else:
+        await ctx.send("Fetching Cooking Data ... ")
+        test_list_7 = search("-cooking")
+        embedVar7 = d.Embed(title="Top Guilds: Cooking", color=0x800000)
+        for i in range(int(rank)):
+            embedVar7.add_field(name=rankk(i+1), value= test_list_7[i] , inline=False)
+        await ctx.send(embed=embedVar7)
+        test_list_7.clear()
+
+@client.command(name='total',aliases=['totalxp'])
+async def total(ctx,rank):
+    if ((int(rank)<=0) or (int(rank)>75)):
+        await ctx.send("Ranks must be between 1 and 25")
+    else:
+        await ctx.send("Fetching Data ... ")
+        test_list_0 = searchTotal()
+        embedVar0 = d.Embed(title="Top Guilds: Total XP", color=0x6600ff)
+        for i in range(int(rank)):
+            embedVar0.add_field(name=rankk(i+1), value= test_list_0[i] , inline=False)
+        await ctx.send(embed=embedVar0)
+        test_list_0.clear()
+
+@client.command(name='all',aliases=['overview','ranking'])
+async def all(ctx,rank):
+    mining = get(ctx.guild.emojis, name="mining")
+    wc = get(ctx.guild.emojis, name="woodcutting")
+    fishing = get(ctx.guild.emojis, name="fishing")
+    smithing = get(ctx.guild.emojis, name="smithing")
+    crafting = get(ctx.guild.emojis, name="crafting")
+    cooking = get(ctx.guild.emojis, name="cooking")
+    combat = get(ctx.guild.emojis, name="combat")
+    #fourth = get(ctx.guild.emojis, name="fourth_place")
+    #fifth = get(ctx.guild.emojis, name="fifth_place") 
+    
+    field_header = [f' {mining} Top Guilds Mining \n',f' {wc} Top Guilds Woodcutting\n',f' {fishing} Top Guilds Fishing\n',f' {smithing} Top Guilds Smithing\n',
+                        f' {crafting} Top Guilds Crafting\n',f' {cooking} Top Guilds Cooking\n',f' {combat} Top Guilds Combat\n',"Top Guilds Total XP\n"]
+    
+    if ((int(rank)<=0) or (int(rank)>25)):
+        await ctx.send("Ranks must be between 1 and 25")
+    else:
+        await ctx.send("Fetching Data ... ")
+        embedVar1 = d.Embed(title="Top Guilds", color=0x669999)
+        listed = LeaderBoard()
+        wierd_order = [1,3,5,2,4,6,0,7]
+        for i in range(8) :
+            msg = ""
+            for j in range(int(rank)):
+                msg = msg + rankk(j+1) + ' ' + listed[wierd_order[i]][j]+'\n'
+            embedVar1.add_field(name= field_header[i], value= msg , inline=True)
+        await ctx.send(embed=embedVar1)
 
     
 

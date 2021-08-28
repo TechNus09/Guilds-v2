@@ -168,6 +168,43 @@ def search(skill_name):
     list_guilds_stred.clear()
     temp_guilds = ResetDict(guilds_counter_int)
     return mini_list
+  
+def searchtag(skill_name,guildtag):
+    members_sorted = []
+    guildreg = {}
+    
+    for k in range(0,49):  
+        url='https://www.curseofaros.com/highscores'
+        headers = {'User-Agent': 'Mozilla/5.0'}        
+        request = Request(url+skill_name+'.json?p='+str(k), headers=headers)
+        html = urlopen(request).read()       
+        data = html.decode("utf-8")        
+        fdata = json.loads(data)
+        for i in range(0,20): 
+            #check names get rank
+            player_rank = 20 * k + i + 1
+            player_name = fdata[i]["name"]
+            xp = fdata[i]["xp"]
+            tag = player_name.split()[0]
+            tag = tag.upper()
+            
+            if tag == guildtag.upper():
+                if player_name in guildreg :
+                    continue
+                else:
+                    guildreg[player_name]=xp
+                    continue
+        
+    temp_dic = {k: v for k, v in sorted(guildreg.items(), key=lambda item: item[1],reverse=True)}
+    
+    DictToList(temp_dic,members_sorted)
+    
+    mini_list = []
+    for i in range(len(members_sorted)):
+        mini_list.append(members_sorted[i])
+    members_sorted.clear()
+    temp_dic = {}
+    return mini_list  
 
 def searchTotal():
     list_guilds_total_stred = []
@@ -447,6 +484,46 @@ async def all(ctx,rank):
                 msg = msg + rankk(j+1) + ' ' + listed[wierd_order[i]][j]+'\n'
             embedVar1.add_field(name= field_header[i], value= msg , inline=True)
         await ctx.send(embed=embedVar1)
+        
+@client.command(name='guildlb',aliases=['guildleaderboard','skillleaderboard'])
+async def guildlb(ctx,skill_name,guildtag,rank):
+    guild_name = guildtag.upper()
+    await ctx.send(f"Getting {guild_name}'s {skill_name} Leaderboard ... ")
+    x = skills.index(skill_name.lower())
+    test_list_8 = searchtag(skill[x],guildtag)
+    tag = guildtag.upper()
+    guildlb_msg = f"Top "+tag+": "+skill_name.capitalize()
+    embedVar8 = d.Embed(title= guildlb_msg , color=0x0066ff)
+    if int(rank) > int(len(test_list_8)):
+        r = int(len(test_list_8))
+    else:
+        r = int(rank)
+    for i in range(r):
+        embedVar8.add_field(name=rankk(i+1), value= test_list_8[i] , inline=False)
+    await ctx.send(embed=embedVar8)
+    test_list_8.clear()
+
+
+@client.command(name='helpme',aliases=['commands?','command?','cmd'])
+async def helpme(ctx):
+    embedVar9 = d.Embed(title="Guilds Commands", color=0x669999)
+    embedVar9.add_field(name="skills ranking", value= "!{skill name} {how much ranks you wanna see}" , inline=False)
+    embedVar9.add_field(name="!combat or !melee or !sw", value= "Show Top Guilds in Combat" , inline=False)
+    embedVar9.add_field(name="!mining or !mine or !pick or !rocky or !kreiger", value= "Show Top Guilds in Mining" , inline=False)
+    embedVar9.add_field(name="!smithing or !smith or !hammer or !ember", value= "Show Top Guilds in Smithing" , inline=False)
+    embedVar9.add_field(name="!woodcutting or !wc or !pecker or !matt", value= "Show Top Guilds in Woodcutting" , inline=False)
+    embedVar9.add_field(name="!crafting or !craft or !woody or !yekzer", value= "Show Top Guilds in Crafting" , inline=False)
+    embedVar9.add_field(name="!fishing or !fish or !tantrid or !tant", value= "Show Top Guilds in Fishing" , inline=False)
+    embedVar9.add_field(name="!cooking or !cook or !food", value= "Show Top Guilds in Cooking" , inline=False)
+    embedVar9.add_field(name="!total or !totalxp", value= "Show Top Guilds in Total XP" , inline=False)
+    embedVar9.add_field(name="!all or !overview or !ranking", value= "Show an Overall Leaderboard" , inline=False)
+    embedVar9.add_field(name="!guildlb or guildleaderboard or !skillleaderboard", value= "Show The Leaderboard of a Guild in a Skill \n should be like !guildlb {skill name} {guild tag} {howmuch guildmemebers to show} " , inline=False)
+    embedVar9.add_field(name="!RandomNumber [number]", value= "Show random number between 1 and the user input" , inline=False)
+    embedVar9.add_field(name="!today", value= "Show Today Date" , inline=False)
+    embedVar9.add_field(name="!test", value= "test The Current Command In developement" , inline=False)
+    embedVar9.add_field(name="!dc or !disconnect or !logout", value= "Disconnect The Bot For a While To Reset Himself" , inline=False)
+    embedVar9.add_field(name="!hello , !wussup , !bye", value= "Interract With The Bot" , inline=False)
+    await ctx.send(embed=embedVar9)   
 
     
 

@@ -528,7 +528,7 @@ async def all(ctx):
     wierd_order = [1,3,5,2,4,6,0,7]
     for i in range(8) :
         msg = ""
-        for j in range(10)):
+        for j in range(10):
             msg = msg + rankk(j+1) + ' ' + listed[wierd_order[i]][j]+'\n'
         embedVar1.add_field(name= field_header[i], value= msg , inline=True)
     await ctx.send(embed=embedVar1)

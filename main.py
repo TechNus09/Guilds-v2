@@ -362,13 +362,6 @@ async def on_ready():
     print('2nd logging in as {0.user}'.format(client))
     await client.change_presence(activity=d.Activity(type=d.ActivityType.playing, name="Dumb Tests"))
 
-#@client.event
-#async def on_message(ctx):
-#    username = str(ctx.author).split('#')[0]
-#    user_message = str(ctx.content)
-#    channel = str(ctx.channel)
-#    print(f'{username}: {user_message} ({channel})')
-
 @client.command()
 async def ping(ctx):
     await ctx.send(f"Pong! {round(client.latency * 1000)}ms")
@@ -526,13 +519,9 @@ async def all(ctx):
     crafting = get(ctx.guild.emojis, name="crafting")
     cooking = get(ctx.guild.emojis, name="cooking")
     combat = get(ctx.guild.emojis, name="combat")
-    #fourth = get(ctx.guild.emojis, name="fourth_place")
-    #fifth = get(ctx.guild.emojis, name="fifth_place") 
     
     field_header = [f' {mining} Top Guilds Mining \n',f' {wc} Top Guilds Woodcutting\n',f' {fishing} Top Guilds Fishing\n',f' {smithing} Top Guilds Smithing\n',
                         f' {crafting} Top Guilds Crafting\n',f' {cooking} Top Guilds Cooking\n',f' {combat} Top Guilds Combat\n',"Top Guilds Total XP\n"]
-    
-    
     await ctx.send("Fetching Data ... ")
     embedVar1 = d.Embed(title="Top Guilds", color=0x669999)
     listed = LeaderBoard()

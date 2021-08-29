@@ -512,8 +512,8 @@ async def guildlb(ctx,skill_name,guildtag,rank):
     test_list_8.clear()
 
 
-@client.command(name='helpme',aliases=['commands?','command?','cmd'])
-async def helpme(ctx):
+@client.command(name='help',aliases=['help?','helpme','commands?','command?','cmd'])
+async def help(ctx):
     embedVar9 = d.Embed(title="Guilds Commands", color=0x669999)
     embedVar9.add_field(name="skills ranking", value= "!{skill name} {how much ranks you wanna see}" , inline=False)
     embedVar9.add_field(name="!combat or !melee or !sw", value= "Show Top Guilds in Combat" , inline=False)
@@ -525,10 +525,11 @@ async def helpme(ctx):
     embedVar9.add_field(name="!cooking or !cook or !food", value= "Show Top Guilds in Cooking" , inline=False)
     embedVar9.add_field(name="!total or !totalxp", value= "Show Top Guilds in Total XP" , inline=False)
     embedVar9.add_field(name="!all or !overview or !ranking", value= "Show an Overall Leaderboard" , inline=False)
-    embedVar9.add_field(name="!guildlb or guildleaderboard or !skillleaderboard", value= "Show The Leaderboard of a Guild in a Skill \n should be like !guildlb {skill name} {guild tag} {howmuch guildmemebers to show} " , inline=False)
+    embedVar9.add_field(name="!guildlb or guildleaderboard or !skillleaderboard", value= "Show The Leaderboard of a Guild in a Skill \n should be in the form: !guildlb {skill name} {guild tag} {howmuch guildmemebers to show} " , inline=False)
     embedVar9.add_field(name="!RandomNumber [number]", value= "Show random number between 1 and the user input" , inline=False)
     embedVar9.add_field(name="!today", value= "Show Today Date" , inline=False)
-    embedVar9.add_field(name="!test", value= "test The Current Command In developement" , inline=False)
+    embedVar9.add_field(name="!help or !help? or !helpme or !commands?", value= "Show  This Menu" , inline=False)
+    embedVar9.add_field(name="!test", value= "test The Current Command In Developement" , inline=False)
     embedVar9.add_field(name="!dc or !disconnect or !logout", value= "Disconnect The Bot For a While To Reset Himself" , inline=False)
     embedVar9.add_field(name="!hello , !wussup , !bye", value= "Interract With The Bot" , inline=False)
     await ctx.send(embed=embedVar9)   

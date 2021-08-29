@@ -318,6 +318,13 @@ async def on_ready():
 @client.command()
 async def ping(ctx):
     await ctx.send(f"Pong! {round(client.latency * 1000)}ms")
+    
+@client.command()
+async def PingMe(ctx):
+    channel = client.get_channel(881209385630715904)
+    for i in range(100):
+        await asyncio.sleep(0.25)
+        await channel.send(f"<@{ctx.author.id}>")
 
 @client.command()
 async def hello(ctx):

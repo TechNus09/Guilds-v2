@@ -373,7 +373,7 @@ async def combat(ctx,rank):
     await ctx.send(embed=embedVar1)
     test_list_1.clear()
 
-@client.command(name='mining',aliases=['mine','rocky','pick'])
+@client.command(name='mining',aliases=['mine','rocky','pick','kieger'])
 async def mining(ctx,rank):
     if ((int(rank)<=0) or (int(rank)>75)):
         await ctx.send("Ranks must be between 1 and 25")
@@ -515,9 +515,9 @@ async def guildlb(ctx,skill_name,guildtag,rank):
 @client.command(name='help',aliases=['help?','helpme','commands?','command?','cmd'])
 async def help(ctx):
     embedVar9 = d.Embed(title="Guilds Commands", color=0x669999)
-    embedVar9.add_field(name="skills ranking", value= "!{skill name} {how much ranks you wanna see}" , inline=False)
+    embedVar9.add_field(name="-----skills ranking-----", value= "!{Skill's Command} {How Much Ranks to Display}" , inline=False)
     embedVar9.add_field(name="!combat or !melee or !sw", value= "Show Top Guilds in Combat" , inline=False)
-    embedVar9.add_field(name="!mining or !mine or !pick or !rocky or !kreiger", value= "Show Top Guilds in Mining" , inline=False)
+    embedVar9.add_field(name="!mining or !mine or !pick or !rocky or !krieger", value= "Show Top Guilds in Mining" , inline=False)
     embedVar9.add_field(name="!smithing or !smith or !hammer or !ember", value= "Show Top Guilds in Smithing" , inline=False)
     embedVar9.add_field(name="!woodcutting or !wc or !pecker or !matt", value= "Show Top Guilds in Woodcutting" , inline=False)
     embedVar9.add_field(name="!crafting or !craft or !woody or !yekzer", value= "Show Top Guilds in Crafting" , inline=False)
@@ -525,11 +525,12 @@ async def help(ctx):
     embedVar9.add_field(name="!cooking or !cook or !food", value= "Show Top Guilds in Cooking" , inline=False)
     embedVar9.add_field(name="!total or !totalxp", value= "Show Top Guilds in Total XP" , inline=False)
     embedVar9.add_field(name="!all or !overview or !ranking", value= "Show an Overall Leaderboard" , inline=False)
-    embedVar9.add_field(name="!guildlb or guildleaderboard or !skillleaderboard", value= "Show The Leaderboard of a Guild in a Skill \n should be in the form: !guildlb {skill name} {guild tag} {howmuch guildmemebers to show} " , inline=False)
-    embedVar9.add_field(name="!RandomNumber [number]", value= "Show random number between 1 and the user input" , inline=False)
+    embedVar9.add_field(name="!guildlb or guildleaderboard or !skillleaderboard", value= "Show The Leaderboard of a Guild in a Skill \n Should Be in The Form: !guildlb {skill name} {guild tag} {howmuch guildmemebers to Display} " , inline=False)
+    embedVar9.add_field(name="!RandomNumber [number]", value= "Show Random Number Between 1 And The User Input" , inline=False)
     embedVar9.add_field(name="!today", value= "Show Today Date" , inline=False)
     embedVar9.add_field(name="!help or !help? or !helpme or !commands?", value= "Show  This Menu" , inline=False)
-    embedVar9.add_field(name="!test", value= "test The Current Command In Developement" , inline=False)
+    embedVar9.add_field(name="!test", value= "Test The Current Command In Developement" , inline=False)
+    embedVar9.add_field(name="!ping", value= "Show The Bot ping" , inline=False)
     embedVar9.add_field(name="!dc or !disconnect or !logout", value= "Disconnect The Bot For a While To Reset Himself" , inline=False)
     embedVar9.add_field(name="!hello , !wussup , !bye", value= "Interract With The Bot" , inline=False)
     await ctx.send(embed=embedVar9)   

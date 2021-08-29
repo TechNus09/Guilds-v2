@@ -308,7 +308,6 @@ def LeaderBoard():
             data = html.decode("utf-8")        
             fdata = json.loads(data)
             for i in range(0,20): 
-                #check names get rank
                 player_name = fdata[i]["name"]
                 xp = fdata[i]["xp"]
                 tag = player_name.split()[0]
@@ -325,7 +324,6 @@ def LeaderBoard():
                     continue
     for j in range(0,8):
         tempo = SortDict(skills_dict_list[j])
-        #skills_dict_list[m] = tempo
         list_lists[j] = DictToList_alt(tempo)
         tempo.clear()
             
@@ -333,8 +331,9 @@ def LeaderBoard():
   
 def SearchMembers(guildtag,rnk):
     members_names = []
+    limit = (rnk // 20) +1
     for skill_name in skill:
-        for k in range(0,200):  
+        for k in range(0,limit):  
             url='https://www.curseofaros.com/highscores'
             headers = {'User-Agent': 'Mozilla/5.0'}        
             request = Request(url+skill_name+'.json?p='+str(k), headers=headers)
@@ -345,15 +344,12 @@ def SearchMembers(guildtag,rnk):
                 player_name = fdata[i]["name"]
                 tag = player_name.split()[0]
                 tag = tag.upper()
-                
                 if tag == guildtag.upper():
                     if player_name in members_names :
                         continue
                     else:
                         members_names.append(player_name)
                         continue
-            if len(members_names) == rnk :
-                break
         return members_names
 
 ############################################################################
@@ -571,14 +567,14 @@ async def guildlb(ctx,skill_name,guildtag,rank):
 async def guildcounter(ctx,guildtag,rank):
     guild_name = guildtag.upper()
     await ctx.send(f"Countings {guild_name}'s members")
-    y = SearchMembers(guild_name,rank)
+    y = SearchMembers(guild_name,int(rank))
     counter_int = len(y)
-    counter_msg = f"{guild_name}'s Members at Top 4000"
+    counter_msg = f"{guild_name}'s Members at Top {rank}"
     embedVar8 = d.Embed(title= counter_msg , color=0x0066ff)
     embedVar8.add_field(name="Count", value= str(counter_int) , inline=False)
     members_msg = ""
     for i in range(counter_int):
-        members_msg = y[i] + '\n'
+        members_msg = members_msg + y[i] + '\n'
     if (guild_name == "OWO"):
         embedVar8.add_field(name="Legends", value= members_msg , inline=False)
     else:

@@ -550,7 +550,8 @@ async def guildlb(ctx,skill_name,guildtag,rank):
         embedVar8.add_field(name=rankk(i+1), value= test_list_8[i] , inline=False)
     await ctx.send(embed=embedVar8)
     test_list_8.clear()
-    
+
+
     
 @client.command(name="guildcounter",aliases=['gc','counter','howmany','hm'])
 async def guildcounter(ctx,guildtag,rank):
@@ -562,15 +563,28 @@ async def guildcounter(ctx,guildtag,rank):
     embedVar8 = d.Embed(title= counter_msg , color=0x0066ff)
     embedVar8.add_field(name="Count", value= str(counter_int) , inline=False)
     members_msg = ""
-    for i in range(counter_int):
-        members_msg = members_msg + y[i] + '\n'
-    if (guild_name == "OWO"):
-        embedVar8.add_field(name="Legends", value= members_msg , inline=False)
+    members_msg0 = ""
+    members_msg1 = ""
+    if (counter_int<65):
+        for i in range(counter_int):
+            members_msg = members_msg + y[i] + '\n'
+        if (guild_name == "OWO"):
+            embedVar8.add_field(name="Legends", value= members_msg , inline=False)
+        else:
+            embedVar8.add_field(name="Members", value= members_msg , inline=False)
     else:
-        embedVar8.add_field(name="Members", value= members_msg , inline=False)
+        for j in range(0,65):
+            members_msg0 = members_msg0 + y[j] + '\n'
+        for k in range(65,counter_int):
+            members_msg1 = members_msg1 + y[k] + '\n'
+        if (guild_name == "OWO"):
+            embedVar8.add_field(name="Legends", value= members_msg0 , inline=False)
+            embedVar8.add_field(name="-", value= members_msg1 , inline=False)
+        else:
+            embedVar8.add_field(name="Members", value= members_msg0 , inline=False)
+            embedVar8.add_field(name="-", value= members_msg1 , inline=False)
     await ctx.send(embed=embedVar8)
     y.clear()
-    
 
 
 
@@ -587,7 +601,8 @@ async def help(ctx):
     embedVar9.add_field(name="!cooking or !cook or !food", value= "Show Top Guilds in Cooking" , inline=False)
     embedVar9.add_field(name="!total or !totalxp", value= "Show Top Guilds in Total XP" , inline=False)
     embedVar9.add_field(name="!all or !overview or !ranking", value= "Show an Overall Leaderboard" , inline=False)
-    embedVar9.add_field(name="!guildlb or guildleaderboard or !skillleaderboard", value= "Show The Leaderboard of a Guild in a Skill \n Should Be in The Form: !guildlb {skill name} {guild tag} {howmuch guildmemebers to Display} " , inline=False)
+    embedVar9.add_field(name="!guildlb or guildleaderboard or !skillleaderboard", value= "Show The Leaderboard of a Guild in a Skill \n !guildlb {skill name} {guild tag} {howmuch guildmemebers to Display} " , inline=False)
+    embedVar9.add_field(name="!guildcounter or !gc or !counter or !howmany or !hm", value= "Show The Members of a Guilds in a Certain Range \n !counter {guild tag} {Top Ranks in Each Skill}" , inline=False)
     embedVar9.add_field(name="!RandomNumber [number]", value= "Show Random Number Between 1 And The User Input" , inline=False)
     embedVar9.add_field(name="!today", value= "Show Today Date" , inline=False)
     embedVar9.add_field(name="!help or !help? or !helpme or !commands?", value= "Show  This Menu" , inline=False)

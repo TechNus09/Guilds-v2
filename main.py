@@ -534,7 +534,7 @@ async def all(ctx):
     await ctx.send(embed=embedVar1)
         
 @client.command(name='guildlb',aliases=['guildleaderboard','skillleaderboard'])
-async def guildlb(ctx,skill_name,guildtag,rank):
+async def guildlb(ctx,skill_name,guildtag):
     guild_name = guildtag.upper()
     await ctx.send(f"Getting {guild_name}'s {skill_name} Leaderboard ... ")
     x = skills.index(skill_name.lower())
@@ -601,7 +601,7 @@ async def help(ctx):
     embedVar9.add_field(name="!cooking or !cook or !food", value= "Show Top Guilds in Cooking" , inline=False)
     embedVar9.add_field(name="!total or !totalxp", value= "Show Top Guilds in Total XP" , inline=False)
     embedVar9.add_field(name="!all or !overview or !ranking", value= "Show an Overall Leaderboard" , inline=False)
-    embedVar9.add_field(name="!guildlb or guildleaderboard or !skillleaderboard", value= "Show The Leaderboard of a Guild in a Skill \n !guildlb {skill name} {guild tag} {howmuch guildmemebers to Display} " , inline=False)
+    embedVar9.add_field(name="!guildlb or guildleaderboard or !skillleaderboard", value= "Show The Leaderboard of a Guild in a Skill \n !guildlb {skill name} {guild tag}" , inline=False)
     embedVar9.add_field(name="!guildcounter or !gc or !counter or !howmany or !hm", value= "Show The Members of a Guilds in a Certain Range \n !counter {guild tag} {Top Ranks in Each Skill}" , inline=False)
     embedVar9.add_field(name="!RandomNumber [number]", value= "Show Random Number Between 1 And The User Input" , inline=False)
     embedVar9.add_field(name="!today", value= "Show Today Date" , inline=False)

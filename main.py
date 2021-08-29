@@ -201,9 +201,10 @@ def search(skill_name):
     temp_guilds = ResetDict(guilds_counter_int)
     return mini_list
   
-def searchtag(skill_name,guildtag):
+def searchtag(skill_name,guildtag,rnk):
     members_sorted = []
-    guildreg = {}
+    guildreg_names = {}
+    guildreg_ranks = {}
     
     for k in range(0,49):  
         url='https://www.curseofaros.com/highscores'
@@ -221,22 +222,28 @@ def searchtag(skill_name,guildtag):
             tag = tag.upper()
             
             if tag == guildtag.upper():
-                if player_name in guildreg :
+                if player_name in guildreg_names :
                     continue
                 else:
-                    guildreg[player_name]=xp
+                    guildreg_names[player_name]=xp
+                    guildreg_ranks[player_name]=player_rank
                     continue
+        if len(guildreg_names) == rnk :
+            break
         
-    temp_dic = {k: v for k, v in sorted(guildreg.items(), key=lambda item: item[1],reverse=True)}
+    temp_dic = {k: v for k, v in sorted(guildreg_names.items(), key=lambda item: item[1],reverse=True)}
     
-    DictToList(temp_dic,members_sorted)
+    members_sorted.clear()
+    for key, value in temp_dic.items():
+        test = key + " -- " + "{:,}".format(value) +"\n [#"+str(guildreg_ranks[key])+"] [Lv."+str(tabfill(value)[0])+" ("+str(tabfill(value)[1])+"%)]"
+        members_sorted.append(test)
     
     mini_list = []
     for i in range(len(members_sorted)):
         mini_list.append(members_sorted[i])
     members_sorted.clear()
     temp_dic = {}
-    return mini_list  
+    return mini_list
 
 def searchTotal():
     list_guilds_total_stred = []
@@ -534,11 +541,11 @@ async def all(ctx):
     await ctx.send(embed=embedVar1)
         
 @client.command(name='guildlb',aliases=['guildleaderboard','skillleaderboard'])
-async def guildlb(ctx,skill_name,guildtag):
+async def guildlb(ctx,skill_name,guildtag,rank):
     guild_name = guildtag.upper()
     await ctx.send(f"Getting {guild_name}'s {skill_name} Leaderboard ... ")
     x = skills.index(skill_name.lower())
-    test_list_8 = searchtag(skill[x],guildtag)
+    test_list_8 = searchtag(skill[x],guildtag,rank)
     tag = guildtag.upper()
     guildlb_msg = f"Top "+tag+": "+skill_name.capitalize()
     embedVar8 = d.Embed(title= guildlb_msg , color=0x0066ff)

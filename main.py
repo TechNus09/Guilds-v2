@@ -303,6 +303,7 @@ def LeaderBoard():
 
 client = d.Client()
 client = commands.Bot(command_prefix='!')
+client.remove_command("help")
 @client.event
 async def on_ready():
     print('2nd logging in as {0.user}'.format(client))

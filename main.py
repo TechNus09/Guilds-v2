@@ -542,10 +542,10 @@ async def guildlb(ctx,skill_name,guildtag):
     tag = guildtag.upper()
     guildlb_msg = f"Top "+tag+": "+skill_name.capitalize()
     embedVar8 = d.Embed(title= guildlb_msg , color=0x0066ff)
-    if int(rank) > int(len(test_list_8)):
+    if 23 > int(len(test_list_8)):
         r = int(len(test_list_8))
     else:
-        r = int(rank)
+        r = 23
     for i in range(r):
         embedVar8.add_field(name=rankk(i+1), value= test_list_8[i] , inline=False)
     await ctx.send(embed=embedVar8)

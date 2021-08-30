@@ -5,7 +5,7 @@ import discord as d
 from discord.ext import commands
 from discord.utils import get
 import random
-from datetime import date
+from datetime import date as dt
 from urllib.request import Request, urlopen
 import json
 
@@ -170,7 +170,7 @@ def search(skill_name):
     list_guilds_stred = []
     
     d_test = ResetDict(guilds_counter_int)
-    for k in range(0,49):  
+    for k in range(0,199):  
         url='https://www.curseofaros.com/highscores'
         headers = {'User-Agent': 'Mozilla/5.0'}        
         request = Request(url+skill_name+'.json?p='+str(k), headers=headers)
@@ -207,7 +207,7 @@ def searchtag(skill_name,guildtag,rnk):
     guildreg_names = {}
     guildreg_ranks = {}
     
-    for k in range(0,49):  
+    for k in range(0,199):  
         url='https://www.curseofaros.com/highscores'
         headers = {'User-Agent': 'Mozilla/5.0'}        
         request = Request(url+skill_name+'.json?p='+str(k), headers=headers)
@@ -250,7 +250,7 @@ def searchTotal():
     list_guilds_total_stred = []
     dd_test = ResetDict(guilds_counter_int)
     for m in range(0,7):
-        for k in range(0,49):  
+        for k in range(0,199):  
             url='https://www.curseofaros.com/highscores'
             headers = {'User-Agent': 'Mozilla/5.0'}        
             request = Request(url+skill[m]+'.json?p='+str(k), headers=headers)
@@ -276,7 +276,7 @@ def searchTotal():
     DictToList(temp_guilds,list_guilds_total_stred)
         
     mini_list = []
-    for i in range(list_guilds_total_stred):
+    for i in range(len(list_guilds_total_stred)):
             mini_list.append(list_guilds_total_stred[i])
     list_guilds_total_stred.clear()
     temp_guilds = ResetDict(guilds_counter_int)
@@ -308,7 +308,7 @@ def LeaderBoard():
     list_lists = [list_0, list_1, list_2, list_3, list_4, list_5, list_6, list_all ]
     
     for m in range(0,7):
-        for k in range(0,49):  
+        for k in range(0,199):  
             url='https://www.curseofaros.com/highscores'
             headers = {'User-Agent': 'Mozilla/5.0'}        
             request = Request(url+skill[m]+'.json?p='+str(k), headers=headers)
@@ -398,8 +398,8 @@ async def bye(ctx):
     username = str(ctx.author).split('#')[0]
     await ctx.send(f"See you later {username}!")
 
-@client.command()
-async def owo(ctx):
+@client.command(name="OwO",aliases=["owo","Owo","oWo"])
+async def OwO(ctx):
     await ctx.send(f"Numba Wan !!")
 
 @client.command(name="random",aliases=["dice"])
@@ -412,7 +412,7 @@ async def dc(ctx):
 
 @client.command()
 async def date(ctx):
-    d1 = date.today().strftime("%d/%m/%Y")
+    d1 = dt.today().strftime("%d/%m/%Y")
     await ctx.send(f'Today is : {d1}')
 
 

@@ -572,27 +572,33 @@ async def guildcounter(ctx,guildtag,rank):
     members_msg = ""
     members_msg0 = ""
     members_msg1 = ""
-    if (counter_int<65):
+    if (counter_int<=65):
         for i in range(counter_int):
             members_msg = members_msg + y[i] + '\n'
         if (guild_name == "OWO"):
             embedVar8.add_field(name="Legends", value= members_msg , inline=False)
         else:
             embedVar8.add_field(name="Members", value= members_msg , inline=False)
-    else:
-        for j in range(0,65):
-            members_msg0 = members_msg0 + y[j] + '\n'
-        for k in range(65,counter_int):
-            members_msg1 = members_msg1 + y[k] + '\n'
-        if (guild_name == "OWO"):
-            embedVar8.add_field(name="Legends", value= members_msg0 , inline=False)
-            embedVar8.add_field(name="-", value= members_msg1 , inline=False)
+            
+    else :
+        field_count =  math.ceil(counter_int / 65)
+        loop_list = []
+        for i in range(field_count):
+            loop_list.append(i*65)
+        loop_list.append(counter_int)
+        if(guild_name == "OWO"):
+            embedVar8.add_field(name="Legends", value= '\u200b' , inline=False)
         else:
-            embedVar8.add_field(name="Members", value= members_msg0 , inline=False)
-            embedVar8.add_field(name="-", value= members_msg1 , inline=False)
+            embedVar8.add_field(name="Members", value= '\u200b' , inline=False)
+            
+        for i in range(field_count):
+            for j in range(loop_list[i],loop_list[i+1]):
+                members_msg0 = members_msg0 + y[j] + '\n'
+            embedVar8.add_field(name='\u200b', value= members_msg0 , inline=False)
+            members_msg0=""
+            
     await ctx.send(embed=embedVar8)
     y.clear()
-
 
 
 @client.command(name='help',aliases=['help?','helpme','commands?','command?','cmd'])

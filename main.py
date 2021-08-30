@@ -1,3 +1,4 @@
+import math
 import os
 import asyncio
 import discord as d

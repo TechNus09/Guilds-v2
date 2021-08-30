@@ -365,6 +365,8 @@ def SearchMembers(guildtag,rnk):
 client = d.Client()
 client = commands.Bot(command_prefix='!')
 client.remove_command("help")
+client.remove_command("date")
+client.remove_command("random")
 @client.event
 async def on_ready():
     print('2nd logging in as {0.user}'.format(client))
@@ -398,10 +400,10 @@ async def bye(ctx):
 
 @client.command()
 async def owo(ctx):
-    await ctx.send(f"OwO Numba Wan !")
+    await ctx.send(f"Numba Wan !!")
 
-@client.command()
-async def RandomNumber(ctx,user_number):
+@client.command(name="random",aliases=["dice"])
+async def random(ctx,user_number):
     await ctx.send(f'{random.randrange(int(user_number))}')
 
 @client.command(name='dc',aliases=['disconnect','logout'])
@@ -409,14 +411,14 @@ async def dc(ctx):
     await client.logout()
 
 @client.command()
-async def today(ctx):
+async def date(ctx):
     d1 = date.today().strftime("%d/%m/%Y")
     await ctx.send(f'Today is : {d1}')
 
 
 @client.command(name='combat',aliases=['melee','sw'])
 async def combat(ctx,rank):
-    if ((int(rank)<=0) or (int(rank)>75)):
+    if ((int(rank)<=0) or (int(rank)>25)):
         await ctx.send("Ranks must be between 1 and 25")
     else:
         await ctx.send("Fetching Combat Data ... ")
@@ -429,7 +431,7 @@ async def combat(ctx,rank):
 
 @client.command(name='mining',aliases=['mine','rocky','pick','krieger'])
 async def mining(ctx,rank):
-    if ((int(rank)<=0) or (int(rank)>75)):
+    if ((int(rank)<=0) or (int(rank)>25)):
         await ctx.send("Ranks must be between 1 and 25")
     else:
         await ctx.send("Fetching Mining Data ... ")
@@ -442,7 +444,7 @@ async def mining(ctx,rank):
 
 @client.command(name='smithing',aliases=['smith','ember','hammer','kreiger'])
 async def smithing(ctx,rank):
-    if ((int(rank)<=0) or (int(rank)>75)):
+    if ((int(rank)<=0) or (int(rank)>25)):
         await ctx.send("Ranks must be between 1 and 25")
     else:
         await ctx.send("Fetching Smithing Data ... ")
@@ -455,7 +457,7 @@ async def smithing(ctx,rank):
 
 @client.command(name='woodcutting',aliases=['wc','pecker','axe','matt'])
 async def woodcutting(ctx,rank):
-    if ((int(rank)<=0) or (int(rank)>75)):
+    if ((int(rank)<=0) or (int(rank)>25)):
         await ctx.send("Ranks must be between 1 and 25")
     else:
         await ctx.send("Fetching Woodcutting Data ... ")
@@ -468,7 +470,7 @@ async def woodcutting(ctx,rank):
 
 @client.command(name='crafting',aliases=['craft','woody','yekzer'])
 async def crafting(ctx,rank):
-    if ((int(rank)<=0) or (int(rank)>75)):
+    if ((int(rank)<=0) or (int(rank)>25)):
         await ctx.send("Ranks must be between 1 and 25")
     else:
         await ctx.send("Fetching Crafting Data ... ")
@@ -481,7 +483,7 @@ async def crafting(ctx,rank):
 
 @client.command(name='fishing',aliases=['fish','tantrid','tant'])
 async def fishing(ctx,rank):
-    if ((int(rank)<=0) or (int(rank)>75)):
+    if ((int(rank)<=0) or (int(rank)>25)):
         await ctx.send("Ranks must be between 1 and 25")
     else:
         await ctx.send("Fetching Fishing Data ... ")
@@ -494,7 +496,7 @@ async def fishing(ctx,rank):
 
 @client.command(name='cooking',aliases=['cook','food'])
 async def cooking(ctx,rank):
-    if ((int(rank)<=0) or (int(rank)>75)):
+    if ((int(rank)<=0) or (int(rank)>25)):
         await ctx.send("Ranks must be between 1 and 25")
     else:
         await ctx.send("Fetching Cooking Data ... ")
@@ -507,7 +509,7 @@ async def cooking(ctx,rank):
 
 @client.command(name='total',aliases=['totalxp'])
 async def total(ctx,rank):
-    if ((int(rank)<=0) or (int(rank)>75)):
+    if ((int(rank)<=0) or (int(rank)>25)):
         await ctx.send("Ranks must be between 1 and 25")
     else:
         await ctx.send("Fetching Data ... ")

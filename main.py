@@ -670,8 +670,8 @@ async def guildcount(ctx,guildtag,rank):
         embed4 = d.Embed(title="\u200b", color=0x6600ff)
         embeds_list = [embed0,embed1,embed2,embed3,embed4]
         exf = math.ceil(counter_int / 65)
-        embeds_int = math.ceil(math.sqrt(exf))
-        fields_int = math.floor(math.sqrt(exf))
+        embeds_int = exf
+        fields_int = exf
 
         if (guild_name == "OWO"):
             embed = d.Embed(title="Legends", inline=False)
@@ -683,16 +683,15 @@ async def guildcount(ctx,guildtag,rank):
 
         for i in range(embeds_int):
             loop_list = []
-            embeds_list[i] = d.Embed(title="Members", inline=False)
+            embeds_list[i] = d.Embed(title="\u200b", inline=False)
             for i in range(fields_int):
                 loop_list.append(i*65)
             loop_list.append(counter_int)
                 
-            for j in range(fields_int):
-                for k in range(loop_list[j*i],loop_list[(j*i)+1]):
-                    members_msg0 = members_msg0 + y[k] + '\n'
-                embeds_list[i].add_field(name='\u200b', value= members_msg0 , inline=False)
-                members_msg0=""
+            for k in range(loop_list[j*i],loop_list[(j*i)+1]):
+                members_msg0 = members_msg0 + y[k] + '\n'
+            embeds_list[i].add_field(name='\u200b', value= members_msg0 , inline=False)
+            members_msg0=""
             await ctx.send(embed=embeds_list[i])
         
         

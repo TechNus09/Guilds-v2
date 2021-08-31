@@ -616,7 +616,7 @@ async def guildrankers(ctx,skill_name,guildtag,rank):
         loop_list.append(counter_int)
         
         for k in range(loop_list[i],loop_list[i+1]):
-            members_msg0 = members_msg0 + rankk(k) + "\n" + test_list_8[k] + '\n'
+            members_msg0 = members_msg0 + rankk(k+1) + "\n" + test_list_8[k] + '\n'
         embeds_list[i].add_field(name='\u200b', value= members_msg0 , inline=False)
         members_msg0=""
         await ctx.send(embed=embeds_list[i])

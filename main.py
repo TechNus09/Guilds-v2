@@ -526,13 +526,10 @@ async def test(ctx):
   embedVar.add_field(name="test, value= "testtesttest" , inline=False)
                      
   embedVarr = d.Embed(title="TEST1", color=0x6600ff)
-  embedVarr.add_field(name="test1, value= "testtesttest1" , inline=False) 
+  embedVarr.add_field(name="test1", value= "testtesttest1" , inline=False) 
                      
   await ctx.send(embed=embedVar)
   await ctx.send(embed=embedVarr)                    
-  
-  
-    await ctx.send(f"Pong! {round(client.latency * 1000)}ms")
 
 @client.command(name='all',aliases=['overview','ranking'])
 async def all(ctx):

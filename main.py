@@ -308,7 +308,7 @@ def LeaderBoard():
     list_lists = [list_0, list_1, list_2, list_3, list_4, list_5, list_6, list_all ]
     
     for m in range(0,7):
-        for k in range(0,199):  
+        for k in range(0,499):  
             url='https://www.curseofaros.com/highscores'
             headers = {'User-Agent': 'Mozilla/5.0'}        
             request = Request(url+skill[m]+'.json?p='+str(k), headers=headers)

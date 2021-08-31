@@ -523,7 +523,7 @@ async def total(ctx,rank):
 @client.command()
 async def test(ctx):
   embedVar = d.Embed(title="TEST", color=0x6600ff)
-  embedVar.add_field(name="test, value= "testtesttest" , inline=False)
+  embedVar.add_field(name="test", value= "testtesttest" , inline=False)
                      
   embedVarr = d.Embed(title="TEST1", color=0x6600ff)
   embedVarr.add_field(name="test1", value= "testtesttest1" , inline=False) 

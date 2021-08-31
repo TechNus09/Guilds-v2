@@ -684,11 +684,11 @@ async def guildcount(ctx,guildtag,rank):
         for i in range(embeds_int):
             loop_list = []
             embeds_list[i] = d.Embed(title="\u200b", inline=False)
-            for i in range(fields_int):
-                loop_list.append(i*65)
+            for j in range(fields_int):
+                loop_list.append(j*65)
             loop_list.append(counter_int)
                 
-            for k in range(loop_list[j*i],loop_list[(j*i)+1]):
+            for k in range(loop_list[i],loop_list[(i)+1]):
                 members_msg0 = members_msg0 + y[k] + '\n'
             embeds_list[i].add_field(name='\u200b', value= members_msg0 , inline=False)
             members_msg0=""

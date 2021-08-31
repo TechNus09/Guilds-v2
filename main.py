@@ -613,6 +613,96 @@ async def guildcounter(ctx,guildtag,rank):
             
     await ctx.send(embed=embedVar8)
     y.clear()
+    
+
+
+@client.command(name="guildcount",aliases=['gc','count','howmany','hm'])
+async def guildcount(ctx,guildtag,rank):
+    guild_name = guildtag.upper()
+    await ctx.send(f"Countings {guild_name}'s members")
+    y = SearchMembers(guild_name,int(rank))
+    counter_int = len(y)
+    counter_msg = f"{guild_name}'s Members at Top {rank}"
+    embedVar8 = d.Embed(title= counter_msg , color=0x0066ff)
+    embedVar8.add_field(name="Count", value= str(counter_int) , inline=False)
+    await ctx.send(embed=embedVar8)
+    members_msg = ""
+    members_msg0 = ""
+    members_msg1 = ""
+    ##############################################################################
+    if (counter_int<=65):
+        if (guild_name == "OWO"):
+            embed = d.Embed(title="Legends", inline=False)
+        else:
+            embed = d.Embed(title="Members", inline=False)
+        for i in range(counter_int):
+            members_msg = members_msg + y[i] + '\n'
+        if (guild_name == "OWO"):
+            embed.add_field(name="\u200b", value= members_msg , inline=False)
+        else:
+            embed.add_field(name="\u200b", value= members_msg , inline=False)
+    ##############################################################################
+    elif ((counter_int>65) and (counter_int<325)):
+        fields_int =  math.ceil(counter_int / 65)
+        loop_list = []
+        for i in range(fields_int):
+            loop_list.append(i*65)
+        loop_list.append(counter_int)
+        if (guild_name == "OWO"):
+            embed = d.Embed(title="Legends", inline=False)
+        else:
+            embed = d.Embed(title="Members", inline=False)
+            
+        for i in range(fields_int):
+            for j in range(loop_list[i],loop_list[i+1]):
+                members_msg0 = members_msg0 + y[j] + '\n'
+            embed.add_field(name='\u200b', value= members_msg0 , inline=False)
+            members_msg0=""
+        await ctx.send(embed=embed)
+    ##############################################################################
+    
+
+    elif ((counter_int>=325) and (counter_int<1625)):
+        embed0 = d.Embed(title="Members", color=0x6600ff)
+        embed1 = d.Embed(title="\u200b", color=0x6600ff)
+        embed2 = d.Embed(title="\u200b", color=0x6600ff)
+        embed3 = d.Embed(title="\u200b", color=0x6600ff)
+        embed4 = d.Embed(title="\u200b", color=0x6600ff)
+        embeds_list = [embed0,embed1,embed2,embed3,embed4]
+        exf = math.ceil(counter_int / 65)
+        embeds_int = math.ceil(math.sqrt(exf))
+        fields_int = math.floor(math.sqrt(exf))
+
+        if (guild_name == "OWO"):
+            embed = d.Embed(title="Legends", inline=False)
+            embed.add_field(name="\u200b",value="\u200b")
+        else:
+            embed = d.Embed(title="Members", inline=False)
+            embed.add_field(name="\u200b",value="\u200b")
+        await ctx.send(embed=embed)
+
+        for i in range(embeds_int):
+            loop_list = []
+            embeds_list[i] = d.Embed(title="Members", inline=False)
+            for i in range(fields_int):
+                loop_list.append(i*65)
+            loop_list.append(counter_int)
+                
+            for j in range(fields_int):
+                for k in range(loop_list[j*i],loop_list[(j*i)+1]):
+                    members_msg0 = members_msg0 + y[k] + '\n'
+                embeds_list[i].add_field(name='\u200b', value= members_msg0 , inline=False)
+                members_msg0=""
+            await ctx.send(embed=embeds_list[i])
+        
+        
+    y.clear()
+
+
+
+
+
+
 
 
 @client.command(name='help',aliases=['help?','helpme','commands?','command?','cmd'])

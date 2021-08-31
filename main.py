@@ -163,7 +163,7 @@ def SortDict (di):
     return temp
 
 def rankk (rank):
-    rank_text = "rank#"+str(rank)
+    rank_text = "**rank#"+str(rank)+"**"
     return rank_text
 
 def search(skill_name):

@@ -554,6 +554,14 @@ async def all(ctx):
         embedVar1.add_field(name= field_header[i], value= msg , inline=True)
     await ctx.send(embed=embedVar1)
         
+      
+      
+      
+      
+      
+      
+      
+      
 @client.command(name='guildlb',aliases=['guildleaderboard','skillleaderboard'])
 async def guildlb(ctx,skill_name,guildtag,rank):
     guild_name = guildtag.upper()
@@ -571,6 +579,60 @@ async def guildlb(ctx,skill_name,guildtag,rank):
         embedVar8.add_field(name=rankk(i+1), value= test_list_8[i] , inline=False)
     await ctx.send(embed=embedVar8)
     test_list_8.clear()
+    
+
+
+@client.command(name='guildrankers',aliases=['gr','skillersboard'])
+async def guildrankers(ctx,skill_name,guildtag,rank):
+    guild_name = guildtag.upper()
+    await ctx.send(f"Getting {guild_name}'s {skill_name} Leaderboard ... ")
+    x = skills.index(skill_name.lower())
+    test_list_8 = searchtag(skill[x],guildtag)
+    tag = guildtag.upper()
+
+    guildlb_msg = f"Top "+tag+": "+skill_name.capitalize()
+    embedVar = d.Embed(title= guildlb_msg , color=0x0066ff)
+    embedVar.add_field(name="Skillers count", value= str(len(test_list_8)) , inline=False)
+    await ctx.send(embed=embedVar)
+
+    counter_int = len(test_list_8)
+    embeds_int = math.ceil(counter_int / 25)
+    fields_int = embeds_int
+
+    embed0 = d.Embed(title="\u200b", color=0x6600ff)
+    embed1 = d.Embed(title="\u200b", color=0x6600ff)
+    embed2 = d.Embed(title="\u200b", color=0x6600ff)
+    embed3 = d.Embed(title="\u200b", color=0x6600ff)
+    embed4 = d.Embed(title="\u200b", color=0x6600ff)
+    embeds_list = [embed0,embed1,embed2,embed3,embed4]
+
+    members_msg0 = ""
+
+
+    for i in range(embeds_int):
+        members_msg0 = ""
+        loop_list = []
+        for j in range(fields_int):
+            loop_list.append(j*25)
+        loop_list.append(counter_int)
+        
+        for k in range(loop_list[i],loop_list[i+1]):
+            members_msg0 = members_msg0 + rankk(k) + "\n" + test_list_8[k] + '\n'
+        embeds_list[i].add_field(name='\u200b', value= members_msg0 , inline=False)
+        members_msg0=""
+        await ctx.send(embed=embeds_list[i])
+    test_list_8.clear()
+
+
+
+
+
+
+
+
+
+
+
 
 
     

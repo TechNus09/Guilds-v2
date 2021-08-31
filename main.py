@@ -595,7 +595,7 @@ async def guildrankers(ctx,skill_name,guildtag,rank):
     await ctx.send(embed=embedVar)
 
     counter_int = len(test_list_8)
-    embeds_int = math.ceil(counter_int / 25)
+    embeds_int = math.ceil(counter_int / 15)
     fields_int = embeds_int
 
     embed0 = d.Embed(title="\u200b", color=0x6600ff)

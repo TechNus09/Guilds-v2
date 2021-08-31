@@ -612,7 +612,7 @@ async def guildrankers(ctx,skill_name,guildtag,rank):
         members_msg0 = ""
         loop_list = []
         for j in range(fields_int):
-            loop_list.append(j*25)
+            loop_list.append(j*15)
         loop_list.append(counter_int)
         
         for k in range(loop_list[i],loop_list[i+1]):

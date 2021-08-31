@@ -519,6 +519,20 @@ async def total(ctx,rank):
             embedVar0.add_field(name=rankk(i+1), value= test_list_0[i] , inline=False)
         await ctx.send(embed=embedVar0)
         test_list_0.clear()
+        
+@client.command()
+async def test(ctx):
+  embedVar = d.Embed(title="TEST", color=0x6600ff)
+  embedVar.add_field(name="test, value= "testtesttest" , inline=False)
+                     
+  embedVarr = d.Embed(title="TEST1", color=0x6600ff)
+  embedVarr.add_field(name="test1, value= "testtesttest1" , inline=False) 
+                     
+  await ctx.send(embed=embedVar)
+  await ctx.send(embed=embedVarr)                    
+  
+  
+    await ctx.send(f"Pong! {round(client.latency * 1000)}ms")
 
 @client.command(name='all',aliases=['overview','ranking'])
 async def all(ctx):

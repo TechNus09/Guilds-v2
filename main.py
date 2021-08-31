@@ -616,7 +616,7 @@ async def guildcounter(ctx,guildtag,rank):
     
 
 
-@client.command(name="guildcount",aliases=['gc','count','howmany','hm'])
+@client.command(name="guildcount",aliases=['count'])
 async def guildcount(ctx,guildtag,rank):
     guild_name = guildtag.upper()
     await ctx.send(f"Countings {guild_name}'s members")

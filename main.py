@@ -202,7 +202,7 @@ def search(skill_name):
     temp_guilds = ResetDict(guilds_counter_int)
     return mini_list
   
-def searchtag(skill_name,guildtag,rnk):
+def searchtag(skill_name,guildtag):
     members_sorted = []
     guildreg_names = {}
     guildreg_ranks = {}
@@ -229,8 +229,7 @@ def searchtag(skill_name,guildtag,rnk):
                     guildreg_names[player_name]=xp
                     guildreg_ranks[player_name]=player_rank
                     continue
-        if len(guildreg_names) == rnk :
-            break
+        
         
     temp_dic = {k: v for k, v in sorted(guildreg_names.items(), key=lambda item: item[1],reverse=True)}
     

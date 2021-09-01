@@ -528,7 +528,7 @@ async def test(ctx):
     await ctx.send(embed=embedVar)
     await ctx.send(embed=embedVarr)
 
-@client.command(name='all',aliases=['overview','ranking'])
+@client.command(name='all',aliases=['overall','ranking'])
 async def all(ctx):
     mining = get(ctx.guild.emojis, name="mining")
     wc = get(ctx.guild.emojis, name="woodcutting")

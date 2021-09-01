@@ -555,7 +555,7 @@ async def all(ctx):
 
 
 @client.command(name='guildlb',aliases=['glb','guildboard'])
-async def guildlb(ctx,skill_name,guildtag,rank):
+async def guildlb(ctx,skill_name,guildtag):
     guild_name = guildtag.upper()
     await ctx.send(f"Getting {guild_name}'s {skill_name} Leaderboard ... ")
     x = skills.index(skill_name.lower())
@@ -576,7 +576,16 @@ async def guildlb(ctx,skill_name,guildtag,rank):
     embed2 = d.Embed(title="\u200b", color=0x6600ff)
     embed3 = d.Embed(title="\u200b", color=0x6600ff)
     embed4 = d.Embed(title="\u200b", color=0x6600ff)
-    embeds_list = [embed0,embed1,embed2,embed3,embed4]
+    embed5 = d.Embed(title="\u200b", color=0x6600ff)
+    embed6 = d.Embed(title="\u200b", color=0x6600ff)
+    embed7 = d.Embed(title="\u200b", color=0x6600ff)
+    embed8 = d.Embed(title="\u200b", color=0x6600ff)
+    embed9 = d.Embed(title="\u200b", color=0x6600ff)
+    embed10 = d.Embed(title="\u200b", color=0x6600ff)
+    embed11 = d.Embed(title="\u200b", color=0x6600ff)
+    embed12 = d.Embed(title="\u200b", color=0x6600ff)
+    embed13 = d.Embed(title="\u200b", color=0x6600ff)
+    embeds_list = [embed0,embed1,embed2,embed3,embed4,embed5,embed6,embed7,embed8,embed9,embed10,embed11,embed12,embed13]
     
     members_msg0 = ""
     

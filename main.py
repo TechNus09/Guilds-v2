@@ -136,7 +136,7 @@ def tabfill(xp):
                 a = round((((xp- lvltab[l]) / lvldef[l])*100),2)
     if a == 100:
         a = 0
-        lvl =+ 1
+        lvl += 1
     return lvl, a
 
 def DictToList (dictio,listo):

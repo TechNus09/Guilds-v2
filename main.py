@@ -1,5 +1,5 @@
-import math
 import os
+import math
 import asyncio
 import discord as d
 from discord.ext import commands
@@ -166,48 +166,14 @@ def rankk (rank):
     rank_text = "**rank#"+str(rank)+"**"
     return rank_text
 
-def search(skill_name):
-    list_guilds_stred = []
+
     
-    d_test = ResetDict(guilds_counter_int)
-    for k in range(0,199):  
-        url='https://www.curseofaros.com/highscores'
-        headers = {'User-Agent': 'Mozilla/5.0'}        
-        request = Request(url+skill_name+'.json?p='+str(k), headers=headers)
-        html = urlopen(request).read()       
-        data = html.decode("utf-8")        
-        fdata = json.loads(data)
-        for i in range(0,20): 
-            #check names get rank
-            player_name = fdata[i]["name"]
-            xp = fdata[i]["xp"]
-            tag = player_name.split()[0]
-            tag = tag.upper()
-            
-            if tag in d_test :
-                d_test[tag] += xp
-            elif "Immortal" in player_name :
-                d_test["IMMORTAL"] += xp
-            else :                
-                continue
-        
-    temp_guilds = {k: v for k, v in sorted(d_test.items(), key=lambda item: item[1],reverse=True)}
-    
-    DictToList(temp_guilds,list_guilds_stred)
-    
-    mini_list = []
-    for i in range(len(list_guilds_stred)):
-        mini_list.append(list_guilds_stred[i])
-    list_guilds_stred.clear()
-    temp_guilds = ResetDict(guilds_counter_int)
-    return mini_list
-  
 def searchtag(skill_name,guildtag):
     members_sorted = []
     guildreg_names = {}
     guildreg_ranks = {}
     
-    for k in range(0,199):  
+    for k in range(0,250):  
         url='https://www.curseofaros.com/highscores'
         headers = {'User-Agent': 'Mozilla/5.0'}        
         request = Request(url+skill_name+'.json?p='+str(k), headers=headers)
@@ -245,11 +211,50 @@ def searchtag(skill_name,guildtag):
     temp_dic = {}
     return mini_list
 
+#get guilds ranking in a certain skill (5000)
+def search(skill_name):
+    list_guilds_stred = []
+    
+    d_test = ResetDict(guilds_counter_int)
+    for k in range(0,250):  
+        url='https://www.curseofaros.com/highscores'
+        headers = {'User-Agent': 'Mozilla/5.0'}        
+        request = Request(url+skill_name+'.json?p='+str(k), headers=headers)
+        html = urlopen(request).read()       
+        data = html.decode("utf-8")        
+        fdata = json.loads(data)
+        for i in range(0,20): 
+            #check names get rank
+            player_name = fdata[i]["name"]
+            xp = fdata[i]["xp"]
+            tag = player_name.split()[0]
+            tag = tag.upper()
+            
+            if tag in d_test :
+                d_test[tag] += xp
+            elif "Immortal" in player_name :
+                d_test["IMMORTAL"] += xp
+            else :                
+                continue
+        
+    temp_guilds = {k: v for k, v in sorted(d_test.items(), key=lambda item: item[1],reverse=True)}
+    
+    DictToList(temp_guilds,list_guilds_stred)
+    
+    mini_list = []
+    for i in range(len(list_guilds_stred)):
+        mini_list.append(list_guilds_stred[i])
+    list_guilds_stred.clear()
+    temp_guilds = ResetDict(guilds_counter_int)
+    return mini_list
+  
+  
+#get guilds ranking in total xp (5000)
 def searchTotal():
     list_guilds_total_stred = []
     dd_test = ResetDict(guilds_counter_int)
     for m in range(0,7):
-        for k in range(0,199):  
+        for k in range(0,250):  
             url='https://www.curseofaros.com/highscores'
             headers = {'User-Agent': 'Mozilla/5.0'}        
             request = Request(url+skill[m]+'.json?p='+str(k), headers=headers)
@@ -282,7 +287,7 @@ def searchTotal():
     return mini_list
 
 
-
+#get guilds overall ranking (20000)
 def LeaderBoard():
     all_xp = ResetDict(guilds_counter_int)
     skill_0 = ResetDict(guilds_counter_int)
@@ -335,7 +340,7 @@ def LeaderBoard():
         tempo.clear()
             
     return list_lists
-  
+#show members counts and lists of a certain guild in a certain range (rnk)
 def SearchMembers(guildtag,rnk):
     members_names = []
     limit = (rnk // 20) +1
@@ -361,11 +366,13 @@ def SearchMembers(guildtag,rnk):
 
 ############################################################################
 
+
 client = d.Client()
 client = commands.Bot(command_prefix='!')
+
 client.remove_command("help")
 client.remove_command("date")
-client.remove_command("random")
+client.remove_command('random')
 @client.event
 async def on_ready():
     print('2nd logging in as {0.user}'.format(client))
@@ -375,12 +382,7 @@ async def on_ready():
 async def ping(ctx):
     await ctx.send(f"Pong! {round(client.latency * 1000)}ms")
     
-@client.command()
-async def PingMe(ctx):
-    channel = client.get_channel(881209385630715904)
-    for i in range(100):
-        await asyncio.sleep(0.25)
-        await channel.send(f"<@{ctx.author.id}>")
+
 
 @client.command()
 async def hello(ctx):
@@ -401,10 +403,6 @@ async def bye(ctx):
 async def OwO(ctx):
     await ctx.send(f"Numba Wan !!")
 
-@client.command(name="random",aliases=["dice"])
-async def random(ctx,user_number):
-    await ctx.send(f'{random.randrange(int(user_number))}')
-
 @client.command(name='dc',aliases=['disconnect','logout'])
 async def dc(ctx):
     await client.logout()
@@ -422,7 +420,7 @@ async def combat(ctx,rank):
     else:
         await ctx.send("Fetching Combat Data ... ")
     test_list_1 = search("")
-    embedVar1 = d.Embed(title="Top Guilds: Combat", color=0x669999)
+    embedVar1 = d.Embed(title="Top Guilds: Combat (5,000)", color=0x669999)
     for i in range(int(rank)):
         embedVar1.add_field(name=rankk(i+1), value= test_list_1[i] , inline=False)
     await ctx.send(embed=embedVar1)
@@ -435,7 +433,7 @@ async def mining(ctx,rank):
     else:
         await ctx.send("Fetching Mining Data ... ")
         test_list_2 = search("-mining")
-        embedVar2 = d.Embed(title="Top Guilds: Mining", color=0x333300)
+        embedVar2 = d.Embed(title="Top Guilds: Mining (5,000)", color=0x333300)
         for i in range(int(rank)):
             embedVar2.add_field(name=rankk(i+1), value= test_list_2[i] , inline=False)
         await ctx.send(embed=embedVar2)
@@ -448,7 +446,7 @@ async def smithing(ctx,rank):
     else:
         await ctx.send("Fetching Smithing Data ... ")
         test_list_3 = search("-smithing")
-        embedVar3 = d.Embed(title="Top Guilds: Smithing", color=0xff0000)
+        embedVar3 = d.Embed(title="Top Guilds: Smithing (5,000)", color=0xff0000)
         for i in range(int(rank)):
             embedVar3.add_field(name=rankk(i+1), value= test_list_3[i] , inline=False)
         await ctx.send(embed=embedVar3)
@@ -461,7 +459,7 @@ async def woodcutting(ctx,rank):
     else:
         await ctx.send("Fetching Woodcutting Data ... ")
         test_list_4 = search("-woodcutting")
-        embedVar4 = d.Embed(title="Top Guilds: Woodcutting", color=0x00cc00)
+        embedVar4 = d.Embed(title="Top Guilds: Woodcutting (5,000)", color=0x00cc00)
         for i in range(int(rank)):
             embedVar4.add_field(name=rankk(i+1), value= test_list_4[i] , inline=False)
         await ctx.send(embed=embedVar4)
@@ -474,7 +472,7 @@ async def crafting(ctx,rank):
     else:
         await ctx.send("Fetching Crafting Data ... ")
         test_list_5 = search("-crafting")
-        embedVar5 = d.Embed(title="Top Guilds: Crafting", color=0x996633)
+        embedVar5 = d.Embed(title="Top Guilds: Crafting (5,000)", color=0x996633)
         for i in range(int(rank)):
             embedVar5.add_field(name=rankk(i+1), value= test_list_5[i] , inline=False)
         await ctx.send(embed=embedVar5)
@@ -487,7 +485,7 @@ async def fishing(ctx,rank):
     else:
         await ctx.send("Fetching Fishing Data ... ")
         test_list_6 = search("-fishing")
-        embedVar6 = d.Embed(title="Top Guilds: Fishing", color=0x0066ff)
+        embedVar6 = d.Embed(title="Top Guilds: Fishing (5,000)", color=0x0066ff)
         for i in range(int(rank)):
             embedVar6.add_field(name=rankk(i+1), value= test_list_6[i] , inline=False)
         await ctx.send(embed=embedVar6)
@@ -500,7 +498,7 @@ async def cooking(ctx,rank):
     else:
         await ctx.send("Fetching Cooking Data ... ")
         test_list_7 = search("-cooking")
-        embedVar7 = d.Embed(title="Top Guilds: Cooking", color=0x800000)
+        embedVar7 = d.Embed(title="Top Guilds: Cooking (5,000)", color=0x800000)
         for i in range(int(rank)):
             embedVar7.add_field(name=rankk(i+1), value= test_list_7[i] , inline=False)
         await ctx.send(embed=embedVar7)
@@ -513,7 +511,7 @@ async def total(ctx,rank):
     else:
         await ctx.send("Fetching Data ... ")
         test_list_0 = searchTotal()
-        embedVar0 = d.Embed(title="Top Guilds: Total XP", color=0x6600ff)
+        embedVar0 = d.Embed(title="Top Guilds: Total XP (5,000)", color=0x6600ff)
         for i in range(int(rank)):
             embedVar0.add_field(name=rankk(i+1), value= test_list_0[i] , inline=False)
         await ctx.send(embed=embedVar0)
@@ -521,14 +519,14 @@ async def total(ctx,rank):
         
 @client.command()
 async def test(ctx):
-  embedVar = d.Embed(title="TEST", color=0x6600ff)
-  embedVar.add_field(name="test", value= "testtesttest" , inline=False)
-                     
-  embedVarr = d.Embed(title="TEST1", color=0x6600ff)
-  embedVarr.add_field(name="test1", value= "testtesttest1" , inline=False) 
-                     
-  await ctx.send(embed=embedVar)
-  await ctx.send(embed=embedVarr)                    
+    embedVar = d.Embed(title="TEST", color=0x6600ff)
+    embedVar.add_field(name="test", value= "testtesttest" , inline=False)
+                        
+    embedVarr = d.Embed(title="TEST1", color=0x6600ff)
+    embedVarr.add_field(name="test1", value= "testtesttest1" , inline=False)
+                    
+    await ctx.send(embed=embedVar)
+    await ctx.send(embed=embedVarr)
 
 @client.command(name='all',aliases=['overview','ranking'])
 async def all(ctx):
@@ -543,7 +541,7 @@ async def all(ctx):
     field_header = [f' {mining} Top Guilds Mining \n',f' {wc} Top Guilds Woodcutting\n',f' {fishing} Top Guilds Fishing\n',f' {smithing} Top Guilds Smithing\n',
                         f' {crafting} Top Guilds Crafting\n',f' {cooking} Top Guilds Cooking\n',f' {combat} Top Guilds Combat\n',"Top Guilds Total XP\n"]
     await ctx.send("Fetching Data ... ")
-    embedVar1 = d.Embed(title="Top Guilds", color=0x669999)
+    embedVar1 = d.Embed(title="Top Guilds (20,000)", color=0x669999)
     listed = LeaderBoard()
     wierd_order = [1,3,5,2,4,6,0,7]
     for i in range(8) :
@@ -553,61 +551,35 @@ async def all(ctx):
         embedVar1.add_field(name= field_header[i], value= msg , inline=True)
     await ctx.send(embed=embedVar1)
         
-      
-      
-      
-      
-      
-      
-      
-      
-@client.command(name='guildlb',aliases=['guildleaderboard','skillleaderboard'])
+
+
+
+@client.command(name='guildlb',aliases=['glb','guildboard'])
 async def guildlb(ctx,skill_name,guildtag,rank):
-    guild_name = guildtag.upper()
-    await ctx.send(f"Getting {guild_name}'s {skill_name} Leaderboard ... ")
-    x = skills.index(skill_name.lower())
-    test_list_8 = searchtag(skill[x],guildtag,rank)
-    tag = guildtag.upper()
-    guildlb_msg = f"Top "+tag+": "+skill_name.capitalize()
-    embedVar8 = d.Embed(title= guildlb_msg , color=0x0066ff)
-    if 23 > int(len(test_list_8)):
-        r = int(len(test_list_8))
-    else:
-        r = 23
-    for i in range(r):
-        embedVar8.add_field(name=rankk(i+1), value= test_list_8[i] , inline=False)
-    await ctx.send(embed=embedVar8)
-    test_list_8.clear()
-    
-
-
-@client.command(name='guildrankers',aliases=['gr','skillersboard'])
-async def guildrankers(ctx,skill_name,guildtag,rank):
     guild_name = guildtag.upper()
     await ctx.send(f"Getting {guild_name}'s {skill_name} Leaderboard ... ")
     x = skills.index(skill_name.lower())
     test_list_8 = searchtag(skill[x],guildtag)
     tag = guildtag.upper()
 
-    guildlb_msg = f"Top "+tag+": "+skill_name.capitalize()
+    guildlb_msg = f"Top "+tag+": "+skill_name.capitalize()+"(5,000)"
     embedVar = d.Embed(title= guildlb_msg , color=0x0066ff)
     embedVar.add_field(name="Skillers count", value= str(len(test_list_8)) , inline=False)
     await ctx.send(embed=embedVar)
-
+    
     counter_int = len(test_list_8)
     embeds_int = math.ceil(counter_int / 15)
     fields_int = embeds_int
-
+    
     embed0 = d.Embed(title="\u200b", color=0x6600ff)
     embed1 = d.Embed(title="\u200b", color=0x6600ff)
     embed2 = d.Embed(title="\u200b", color=0x6600ff)
     embed3 = d.Embed(title="\u200b", color=0x6600ff)
     embed4 = d.Embed(title="\u200b", color=0x6600ff)
     embeds_list = [embed0,embed1,embed2,embed3,embed4]
-
+    
     members_msg0 = ""
-
-
+    
     for i in range(embeds_int):
         members_msg0 = ""
         loop_list = []
@@ -621,63 +593,10 @@ async def guildrankers(ctx,skill_name,guildtag,rank):
         members_msg0=""
         await ctx.send(embed=embeds_list[i])
     test_list_8.clear()
-
-
-
-
-
-
-
-
-
-
-
-
-
     
-@client.command(name="guildcounter",aliases=['gc','counter','howmany','hm'])
-async def guildcounter(ctx,guildtag,rank):
-    guild_name = guildtag.upper()
-    await ctx.send(f"Countings {guild_name}'s members")
-    y = SearchMembers(guild_name,int(rank))
-    counter_int = len(y)
-    counter_msg = f"{guild_name}'s Members at Top {rank}"
-    embedVar8 = d.Embed(title= counter_msg , color=0x0066ff)
-    embedVar8.add_field(name="Count", value= str(counter_int) , inline=False)
-    members_msg = ""
-    members_msg0 = ""
-    members_msg1 = ""
-    if (counter_int<=65):
-        for i in range(counter_int):
-            members_msg = members_msg + y[i] + '\n'
-        if (guild_name == "OWO"):
-            embedVar8.add_field(name="Legends", value= members_msg , inline=False)
-        else:
-            embedVar8.add_field(name="Members", value= members_msg , inline=False)
-            
-    else :
-        field_count =  math.ceil(counter_int / 65)
-        loop_list = []
-        for i in range(field_count):
-            loop_list.append(i*65)
-        loop_list.append(counter_int)
-        if(guild_name == "OWO"):
-            embedVar8.add_field(name="Legends", value= '\u200b' , inline=False)
-        else:
-            embedVar8.add_field(name="Members", value= '\u200b' , inline=False)
-            
-        for i in range(field_count):
-            for j in range(loop_list[i],loop_list[i+1]):
-                members_msg0 = members_msg0 + y[j] + '\n'
-            embedVar8.add_field(name='\u200b', value= members_msg0 , inline=False)
-            members_msg0=""
-            
-    await ctx.send(embed=embedVar8)
-    y.clear()
     
-
-
-@client.command(name="guildcount",aliases=['count'])
+    
+@client.command(name="guildcount",aliases=['gc','count','howmany','hm'])
 async def guildcount(ctx,guildtag,rank):
     guild_name = guildtag.upper()
     await ctx.send(f"Countings {guild_name}'s members")
@@ -689,7 +608,6 @@ async def guildcount(ctx,guildtag,rank):
     await ctx.send(embed=embedVar8)
     members_msg = ""
     members_msg0 = ""
-    members_msg1 = ""
     ##############################################################################
     if (counter_int<=65):
         if (guild_name == "OWO"):
@@ -721,8 +639,6 @@ async def guildcount(ctx,guildtag,rank):
             members_msg0=""
         await ctx.send(embed=embed)
     ##############################################################################
-    
-
     elif ((counter_int>=325) and (counter_int<1625)):
         embed0 = d.Embed(title="Members", color=0x6600ff)
         embed1 = d.Embed(title="\u200b", color=0x6600ff)
@@ -768,19 +684,18 @@ async def guildcount(ctx,guildtag,rank):
 @client.command(name='help',aliases=['help?','helpme','commands?','command?','cmd'])
 async def help(ctx):
     embedVar9 = d.Embed(title="Guilds Commands", color=0x669999)
-    embedVar9.add_field(name="-----skills ranking-----", value= "!{Skill's Command} {How Much Ranks to Display}" , inline=False)
-    embedVar9.add_field(name="!combat or !melee or !sw", value= "Show Top Guilds in Combat" , inline=False)
-    embedVar9.add_field(name="!mining or !mine or !pick or !rocky or !krieger", value= "Show Top Guilds in Mining" , inline=False)
-    embedVar9.add_field(name="!smithing or !smith or !hammer or !ember", value= "Show Top Guilds in Smithing" , inline=False)
-    embedVar9.add_field(name="!woodcutting or !wc or !pecker or !matt", value= "Show Top Guilds in Woodcutting" , inline=False)
-    embedVar9.add_field(name="!crafting or !craft or !woody or !yekzer", value= "Show Top Guilds in Crafting" , inline=False)
-    embedVar9.add_field(name="!fishing or !fish or !tantrid or !tant", value= "Show Top Guilds in Fishing" , inline=False)
-    embedVar9.add_field(name="!cooking or !cook or !food", value= "Show Top Guilds in Cooking" , inline=False)
-    embedVar9.add_field(name="!total or !totalxp", value= "Show Top Guilds in Total XP" , inline=False)
-    embedVar9.add_field(name="!all or !overview or !ranking", value= "Show an Overall Leaderboard" , inline=False)
-    embedVar9.add_field(name="!guildlb or guildleaderboard or !skillleaderboard", value= "Show The Leaderboard of a Guild in a Skill \n !guildlb {skill name} {guild tag}" , inline=False)
-    embedVar9.add_field(name="!guildcounter or !gc or !counter or !howmany or !hm", value= "Show The Members of a Guilds in a Certain Range \n !counter {guild tag} {Top Ranks in Each Skill}" , inline=False)
-    embedVar9.add_field(name="!random [number]", value= "Show Random Number Between 1 And The User Input" , inline=False)
+    embedVar9.add_field(name="-----skills ranking-----", value= "!{Skill's Command} {How Many Guilds to Display}" , inline=False)
+    embedVar9.add_field(name="!combat or !melee or !sw", value= "Show Top Guilds in Combat (From Top 5,000 players)" , inline=False)
+    embedVar9.add_field(name="!mining or !mine or !pick or !rocky or !krieger", value= "Show Top Guilds in Mining (From Top 5,000 players)" , inline=False)
+    embedVar9.add_field(name="!smithing or !smith or !hammer or !ember", value= "Show Top Guilds in Smithing (From Top 5,000 players)" , inline=False)
+    embedVar9.add_field(name="!woodcutting or !wc or !pecker or !matt", value= "Show Top Guilds in Woodcutting (From Top 5,000 players)" , inline=False)
+    embedVar9.add_field(name="!crafting or !craft or !woody or !yekzer", value= "Show Top Guilds in Crafting (From Top 5,000 players)" , inline=False)
+    embedVar9.add_field(name="!fishing or !fish or !tantrid or !tant", value= "Show Top Guilds in Fishing (From Top 5,000 players)" , inline=False)
+    embedVar9.add_field(name="!cooking or !cook or !food", value= "Show Top Guilds in Cooking (From Top 5,000 players)" , inline=False)
+    embedVar9.add_field(name="!total or !totalxp", value= "Show Top Guilds in Total XP (From Top 5,000 players)" , inline=False)
+    embedVar9.add_field(name="!all or !overall or !ranking", value= "Show an Overall Leaderboard (From Top 20,000 players)" , inline=False)
+    embedVar9.add_field(name="!guildlb or !glb or !guildboard", value= "Show The Leaderboard of a Guild in a Skill (From Top 5,000 players)\n !guildlb {skill name} {guild tag}" , inline=False)
+    embedVar9.add_field(name="!guildcount or !gc or !counter or !howmany or !hm", value= "Show The Members of a Guilds in a Certain Range \n !counter {guild tag} {Search Range}" , inline=False)
     embedVar9.add_field(name="!date", value= "Show Today Date" , inline=False)
     embedVar9.add_field(name="!help or !help? or !helpme or !commands?", value= "Show  This Menu" , inline=False)
     embedVar9.add_field(name="!test", value= "Test The Current Command In Developement" , inline=False)
@@ -789,6 +704,6 @@ async def help(ctx):
     embedVar9.add_field(name="!hello , !wussup , !bye", value= "Interract With The Bot" , inline=False)
     await ctx.send(embed=embedVar9)   
 
-    
+
 
 client.run(os.getenv('TOKEN'))

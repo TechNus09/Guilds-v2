@@ -616,10 +616,8 @@ async def guildcount(ctx,guildtag,rank):
             embed = d.Embed(title="Members", inline=False)
         for i in range(counter_int):
             members_msg = members_msg + y[i] + '\n'
-        if (guild_name == "OWO"):
-            embed.add_field(name="\u200b", value= members_msg , inline=False)
-        else:
-            embed.add_field(name="\u200b", value= members_msg , inline=False)
+        embed.add_field(name="\u200b", value= members_msg , inline=False)
+        await ctx.send(embed=embed)      
     ##############################################################################
     elif ((counter_int>65) and (counter_int<325)):
         fields_int =  math.ceil(counter_int / 65)

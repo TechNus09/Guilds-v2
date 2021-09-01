@@ -643,6 +643,13 @@ async def guildcount(ctx,guildtag,rank):
         embed2 = d.Embed(title="\u200b", color=0x6600ff)
         embed3 = d.Embed(title="\u200b", color=0x6600ff)
         embed4 = d.Embed(title="\u200b", color=0x6600ff)
+        embed5 = d.Embed(title="\u200b", color=0x6600ff)
+        embed6 = d.Embed(title="\u200b", color=0x6600ff)
+        embed7 = d.Embed(title="\u200b", color=0x6600ff)
+        embed8 = d.Embed(title="\u200b", color=0x6600ff)
+        embed9 = d.Embed(title="\u200b", color=0x6600ff)
+        embed10 = d.Embed(title="\u200b", color=0x6600ff)
+        embed11 = d.Embed(title="\u200b", color=0x6600ff)
         embeds_list = [embed0,embed1,embed2,embed3,embed4]
         exf = math.ceil(counter_int / 65)
         embeds_int = exf

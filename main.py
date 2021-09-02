@@ -647,7 +647,7 @@ async def guildcount(ctx,guildtag,rank):
         await ctx.send(embed=embed)
     ##############################################################################
     elif ((counter_int>=325) and (counter_int<1625)):
-        embed0 = d.Embed(title="Members", color=0x6600ff)
+        embed0 = d.Embed(title="\u200b", color=0x6600ff)
         embed1 = d.Embed(title="\u200b", color=0x6600ff)
         embed2 = d.Embed(title="\u200b", color=0x6600ff)
         embed3 = d.Embed(title="\u200b", color=0x6600ff)

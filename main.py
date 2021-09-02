@@ -362,7 +362,7 @@ def SearchMembers(guildtag,rnk):
                     else:
                         members_names.append(player_name)
                         continue
-        return members_names
+    return members_names
 
 ############################################################################
 

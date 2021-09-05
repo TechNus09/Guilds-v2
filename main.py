@@ -216,7 +216,7 @@ def searchtagtotal(guildtag):
     guildreg = {}
 
     
-    for m in range(7)
+    for m in range(7):
         for k in range(0,999):  
             url='https://www.curseofaros.com/highscores'
             headers = {'User-Agent': 'Mozilla/5.0'}        

@@ -210,6 +210,50 @@ def searchtag(skill_name,guildtag):
     members_sorted.clear()
     temp_dic = {}
     return mini_list
+#get guilds members rankings on total xp (20000)
+def searchtagtotal(guildtag):
+    members_sorted = []
+    guildreg = {}
+
+    
+    for m in range(7)
+        for k in range(0,999):  
+            url='https://www.curseofaros.com/highscores'
+            headers = {'User-Agent': 'Mozilla/5.0'}        
+            request = Request(url+skills[m]+'.json?p='+str(k), headers=headers)
+            html = urlopen(request).read()       
+            data = html.decode("utf-8")        
+            fdata = json.loads(data)
+            for i in range(0,20): 
+                #check names get rank
+                player_rank = 20 * k + i + 1
+                player_name = fdata[i]["name"]
+                xp = fdata[i]["xp"]
+                tag = player_name.split()[0]
+                tag = tag.upper()
+                
+                if tag == guildtag.upper():
+                    if player_name in guildreg :
+                        guildreg[player_name]+=xp
+                        continue
+                    else:
+                        guildreg[player_name]=xp
+                        continue
+        
+        
+    temp_dic = {k: v for k, v in sorted(guildreg.items(), key=lambda item: item[1],reverse=True)}
+    
+    members_sorted.clear()
+    for key, value in temp_dic.items():
+        test = key + " -- " + "{:,}".format(value)
+        members_sorted.append(test)
+    
+    mini_list = []
+    for i in range(len(members_sorted)):
+        mini_list.append(members_sorted[i])
+    members_sorted.clear()
+    temp_dic = {}
+    return mini_list
 
 #get guilds ranking in a certain skill (5000)
 def search(skill_name):
@@ -603,7 +647,62 @@ async def guildlb(ctx,skill_name,guildtag):
         await ctx.send(embed=embeds_list[i])
     test_list_8.clear()
     
+@client.command(name='guildlbT',aliases=['glbt','guildranks'])
+async def guildlbT(ctx,guildtag):
+    guild_name = guildtag.upper()
+    await ctx.send(f"Getting {guild_name}'s Leaderboard ... ")
+    x = skills.index(skill_name.lower())
+    test_list_10 = searchtagtotal(guildtag)
+    tag = guildtag.upper()
+
+    guildlb_msg = f"Top "+tag+": "+"[Total XP](20,000)"
+    embedVar = d.Embed(title= guildlb_msg , color=0x0066ff)
+    embedVar.add_field(name="Players Count", value= str(len(test_list_10)) , inline=False)
+    await ctx.send(embed=embedVar)
     
+    counter_int = len(test_list_10)
+    embeds_int = math.ceil(counter_int / 15)
+    fields_int = embeds_int
+    
+    embed0 = d.Embed(title="\u200b", color=0x6600ff)
+    embed1 = d.Embed(title="\u200b", color=0x6600ff)
+    embed2 = d.Embed(title="\u200b", color=0x6600ff)
+    embed3 = d.Embed(title="\u200b", color=0x6600ff)
+    embed4 = d.Embed(title="\u200b", color=0x6600ff)
+    embed5 = d.Embed(title="\u200b", color=0x6600ff)
+    embed6 = d.Embed(title="\u200b", color=0x6600ff)
+    embed7 = d.Embed(title="\u200b", color=0x6600ff)
+    embed8 = d.Embed(title="\u200b", color=0x6600ff)
+    embed9 = d.Embed(title="\u200b", color=0x6600ff)
+    embed10 = d.Embed(title="\u200b", color=0x6600ff)
+    embed11 = d.Embed(title="\u200b", color=0x6600ff)
+    embed12 = d.Embed(title="\u200b", color=0x6600ff)
+    embed13 = d.Embed(title="\u200b", color=0x6600ff)
+    embed14 = d.Embed(title="\u200b", color=0x6600ff)
+    embed15 = d.Embed(title="\u200b", color=0x6600ff)
+    embed16 = d.Embed(title="\u200b", color=0x6600ff)
+    embed17 = d.Embed(title="\u200b", color=0x6600ff)
+    embeds_list = [embed0,embed1,embed2,embed3,embed4,embed5,embed6,embed7,embed8,embed9,embed10,embed11,embed12,embed13,embed14,embed15,embed16,embed17]
+    
+    members_msg0 = ""
+    
+    for i in range(embeds_int):
+        members_msg0 = ""
+        loop_list = []
+        for j in range(fields_int):
+            loop_list.append(j*15)
+        loop_list.append(counter_int)
+        
+        for k in range(loop_list[i],loop_list[i+1]):
+            members_msg0 = members_msg0 + rankk(k+1) + "\n" + test_list_10[k] + '\n'
+        embeds_list[i].add_field(name='\u200b', value= members_msg0 , inline=False)
+        members_msg0=""
+        await ctx.send(embed=embeds_list[i])
+    test_list_10.clear()                  
+
+
+
+
     
 @client.command(name="guildcount",aliases=['gc','count','howmany','hm'])
 async def guildcount(ctx,guildtag,rank):

@@ -220,7 +220,7 @@ def searchtagtotal(guildtag):
         for k in range(0,999):  
             url='https://www.curseofaros.com/highscores'
             headers = {'User-Agent': 'Mozilla/5.0'}        
-            request = Request(url+skills[m]+'.json?p='+str(k), headers=headers)
+            request = Request(url+skill[m]+'.json?p='+str(k), headers=headers)
             html = urlopen(request).read()       
             data = html.decode("utf-8")        
             fdata = json.loads(data)

@@ -651,7 +651,6 @@ async def guildlb(ctx,skill_name,guildtag):
 async def guildlbT(ctx,guildtag):
     guild_name = guildtag.upper()
     await ctx.send(f"Getting {guild_name}'s Leaderboard ... ")
-    x = skills.index(skill_name.lower())
     test_list_10 = searchtagtotal(guildtag)
     tag = guildtag.upper()
 

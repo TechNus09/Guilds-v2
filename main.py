@@ -606,7 +606,7 @@ async def guildlb(ctx,skill_name,guildtag):
     test_list_8 = searchtag(skill[x],guildtag)
     tag = guildtag.upper()
 
-    guildlb_msg = f"Top "+tag+": "+skill_name.capitalize()+"(5,000)"
+    guildlb_msg = f"Top "+tag+": "+skill_name.capitalize()+"(20,000)"
     embedVar = d.Embed(title= guildlb_msg , color=0x0066ff)
     embedVar.add_field(name="Skillers count", value= str(len(test_list_8)) , inline=False)
     await ctx.send(embed=embedVar)

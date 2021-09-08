@@ -419,7 +419,7 @@ client.remove_command("date")
 client.remove_command('random')
 @client.event
 async def on_ready():
-    print('2nd logging in as {0.user}'.format(client))
+    print('Logging in as {0.user}'.format(client))
     await client.change_presence(activity=d.Activity(type=d.ActivityType.watching, name="LeaderBoard"))
 
 @client.command()

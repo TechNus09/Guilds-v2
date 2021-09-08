@@ -167,13 +167,13 @@ def rankk (rank):
     return rank_text
 
 
-    
+#get guild members rankings in a certain skill (20000)    
 def searchtag(skill_name,guildtag):
     members_sorted = []
     guildreg_names = {}
     guildreg_ranks = {}
     
-    for k in range(0,250):  
+    for k in range(0,999):  
         url='https://www.curseofaros.com/highscores'
         headers = {'User-Agent': 'Mozilla/5.0'}        
         request = Request(url+skill_name+'.json?p='+str(k), headers=headers)
@@ -210,7 +210,7 @@ def searchtag(skill_name,guildtag):
     members_sorted.clear()
     temp_dic = {}
     return mini_list
-#get guilds members rankings on total xp (20000)
+#get guilds members rankings in total xp (20000)
 def searchtagtotal(guildtag):
     members_sorted = []
     guildreg = {}
@@ -615,6 +615,7 @@ async def guildlb(ctx,skill_name,guildtag):
     embeds_int = math.ceil(counter_int / 15)
     fields_int = embeds_int
     
+
     embed0 = d.Embed(title="\u200b", color=0x6600ff)
     embed1 = d.Embed(title="\u200b", color=0x6600ff)
     embed2 = d.Embed(title="\u200b", color=0x6600ff)
@@ -629,7 +630,11 @@ async def guildlb(ctx,skill_name,guildtag):
     embed11 = d.Embed(title="\u200b", color=0x6600ff)
     embed12 = d.Embed(title="\u200b", color=0x6600ff)
     embed13 = d.Embed(title="\u200b", color=0x6600ff)
-    embeds_list = [embed0,embed1,embed2,embed3,embed4,embed5,embed6,embed7,embed8,embed9,embed10,embed11,embed12,embed13]
+    embed14 = d.Embed(title="\u200b", color=0x6600ff)
+    embed15 = d.Embed(title="\u200b", color=0x6600ff)
+    embed16 = d.Embed(title="\u200b", color=0x6600ff)
+    embed17 = d.Embed(title="\u200b", color=0x6600ff)
+    embeds_list = [embed0,embed1,embed2,embed3,embed4,embed5,embed6,embed7,embed8,embed9,embed10,embed11,embed12,embed13,embed14,embed15,embed16,embed17]
     
     members_msg0 = ""
     
@@ -806,7 +811,8 @@ async def help(ctx):
     embedVar9.add_field(name="!cooking or !cook or !food", value= "Show Top Guilds in Cooking (From Top 5,000 players)" , inline=False)
     embedVar9.add_field(name="!total or !totalxp", value= "Show Top Guilds in Total XP (From Top 5,000 players)" , inline=False)
     embedVar9.add_field(name="!all or !overall or !ranking", value= "Show an Overall Leaderboard (From Top 20,000 players)" , inline=False)
-    embedVar9.add_field(name="!guildlb or !glb or !guildboard", value= "Show The Leaderboard of a Guild in a Skill (From Top 5,000 players)\n !guildlb {skill name} {guild tag}" , inline=False)
+    embedVar9.add_field(name="!guildlb or !glb or !guildboard", value= "Show The Leaderboard of a Guild in a Skill (From Top 20,000 players)\n !guildlb {skill name} {guild tag}" , inline=False)
+    embedVar9.add_field(name="!guildlbT or !glbT or !guildboardT", value= "Show The Leaderboard of a Guild in Total XP (From Top 20,000 players)\n !guildlbT {guild tag}" , inline=False)
     embedVar9.add_field(name="!guildcount or !gc or !counter or !howmany or !hm", value= "Show The Members of a Guilds in a Certain Range \n !counter {guild tag} {Search Range}" , inline=False)
     embedVar9.add_field(name="!date", value= "Show Today Date" , inline=False)
     embedVar9.add_field(name="!help or !help? or !helpme or !commands?", value= "Show  This Menu" , inline=False)

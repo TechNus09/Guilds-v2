@@ -637,7 +637,7 @@ async def total(ctx,rank):
         test_list_0.clear()
         
 @client.command()
-async def test(ctx):
+async def test0(ctx):
     embedVar = d.Embed(title="TEST", color=0x6600ff)
     embedVar.add_field(name="test", value= "testtesttest" , inline=False)
                         

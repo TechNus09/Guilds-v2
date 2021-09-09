@@ -637,7 +637,7 @@ async def total(ctx,rank):
         test_list_0.clear()
         
 @client.command()
-async def test0(ctx):
+async def test(ctx):
     embedVar = d.Embed(title="TEST", color=0x6600ff)
     embedVar.add_field(name="test", value= "testtesttest" , inline=False)
                         
@@ -728,18 +728,8 @@ async def guildlb(ctx,skill_name,guildtag):
     test_list_8.clear()
     
     
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
 @client.command()
-async def test(ctx):
+async def event(ctx):
 
     await ctx.send(f"Getting Combat Grinders Leaderboard ... ")
     results_list = []
@@ -749,18 +739,6 @@ async def test(ctx):
         temp_msg = temp_msg + results_list[i] + '\n'
     await ctx.send(f"{temp_msg}")
     results_list.clear()
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     

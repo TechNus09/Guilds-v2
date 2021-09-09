@@ -741,14 +741,14 @@ async def guildlb(ctx,skill_name,guildtag):
 @client.command()
 async def test(ctx):
 
-await ctx.send(f"Getting Combat Grinders Leaderboard ... ")
-results_list = []
-results_list = CombatEvent()
-temp_msg = ""
-for i in range(len(results_list)):
-    temp_msg = temp_msg + results_list[i] + '\n'
-await ctx.send(f"{temp_msg}")
-results_list.clear()
+    await ctx.send(f"Getting Combat Grinders Leaderboard ... ")
+    results_list = []
+    results_list = CombatEvent()
+    temp_msg = ""
+    for i in range(len(results_list)):
+        temp_msg = temp_msg + results_list[i] + '\n'
+    await ctx.send(f"{temp_msg}")
+    results_list.clear()
 
 
 

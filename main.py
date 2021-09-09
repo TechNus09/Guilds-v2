@@ -149,6 +149,7 @@ players_final = {
 
 ###########Temporal OwO Event#########################################
 def CombatEvent() :
+    total_guild_xp = 0
     results = []
     ToZero(players_new)
     ToZero(players_final)
@@ -170,11 +171,13 @@ def CombatEvent() :
                 continue
     for key in players_int:
         players_final[key] = players_new[key]-players_int[key]
+        total_guild_xp += players_final[key]
 
     temp_results = {k: v for k, v in sorted(players_final.items(), key=lambda item: item[1],reverse=True)}
     DictToList(temp_results,results)
     for m in range(len(results)):
         results[m] = '#'+str(m+1)+' - '+results[m]
+    results.append(total_guild_xp)
 
     return results
         
@@ -735,9 +738,11 @@ async def event(ctx):
     results_list = []
     results_list = CombatEvent()
     temp_msg = ""
-    for i in range(len(results_list)):
+    for i in range(len(results_list)-1):
         temp_msg = temp_msg + results_list[i] + '\n'
     await ctx.send(f"{temp_msg}")
+    temp_msg0 = "Total Guild Gained Xp"+' -- '+results[len(results)]
+    await ctx.send(f"{temp_msg0}")
     results_list.clear()
 
 

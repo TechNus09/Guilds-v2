@@ -741,7 +741,7 @@ async def event(ctx):
     for i in range(len(results_list)-1):
         temp_msg = temp_msg + results_list[i] + '\n'
     await ctx.send(f"{temp_msg}")
-    temp_msg0 = "Total Guild Gained Xp"+' -- '+results[len(results)]
+    temp_msg0 = "Total Guild Gained Xp"+' -- '+results_list[len(results)]
     await ctx.send(f"{temp_msg0}")
     results_list.clear()
 

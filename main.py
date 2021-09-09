@@ -741,7 +741,7 @@ async def event(ctx):
     for i in range(len(results_list)-1):
         temp_msg = temp_msg + results_list[i] + '\n'
     await ctx.send(f"{temp_msg}")
-    temp_msg0 = "Total Guild Gained Xp"+' -- '+results_list[len(results_list)]
+    temp_msg0 = "Total Guild Gained Xp"+' -- '+results_list[len(results_list-1)]
     await ctx.send(f"{temp_msg0}")
     results_list.clear()
 
@@ -882,8 +882,6 @@ async def guildcount(ctx,guildtag,rank):
             embeds_list[i].add_field(name='\u200b', value= members_msg0 , inline=False)
             members_msg0=""
             await ctx.send(embed=embeds_list[i])
-        
-        
     y.clear()
 
 

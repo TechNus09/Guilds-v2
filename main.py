@@ -121,8 +121,83 @@ lvldef = [46, 53, 60, 70, 80, 92, 106, 121, 140, 160, 184, 212, 243, 280, 321, 3
 48426151, 55627040, 63898689, 73400320, 84314826, 96852302, 111254081, 127797379, 146800640, 168629653, 193704605, 222508162, 255594759, 293601280, 337259307, 387409211, 445016324, 
 511189519, 587202560]
 
+players_int = { 
+"OwO DarkSecret":366325723,"OwO TheDuck":2188464625,"OwO Tantrid":1079995424,"OwO Bat Orb":824520444,"OwO TechNus09":149194349
+,"OwO Maddy":191391070,"OwO Dryness":863940555,"OwO Spooniest":733000732,"OwO DigiPope":374092835,"OwO Durps":20455489
+,"OwO Heartman":233269600,"OwO Doony":129127527,"OwO Messwithme":526312899,"OwO Stoned":70877064,"OwO DaveDust":1200928774
+,"OwO Mullet":215590742,"OwO Yekzer":291112988 ,"OwO Cool Adam":162851572,"OwO Moist":656572649}
+
+players_new = { 
+"OwO DarkSecret":0,"OwO TheDuck":0,"OwO Tantrid":0,"OwO Bat Orb":0,"OwO TechNus09":0
+,"OwO Maddy":0,"OwO Dryness":0,"OwO Spooniest":0,"OwO DigiPope":0,"OwO Durps":0
+,"OwO Heartman":0,"OwO Doony":0,"OwO Messwithme":0,"OwO Stoned":0,"OwO DaveDust":0
+,"OwO Mullet":0,"OwO Yekzer":0 ,"OwO Cool Adam":0,"OwO Moist":0}
+
+players_final = { 
+"OwO DarkSecret":0,"OwO TheDuck":0,"OwO Tantrid":0,"OwO Bat Orb":0,"OwO TechNus09":0
+,"OwO Maddy":0,"OwO Dryness":0,"OwO Spooniest":0,"OwO DigiPope":0,"OwO Durps":0
+,"OwO Heartman":0,"OwO Doony":0,"OwO Messwithme":0,"OwO Stoned":0,"OwO DaveDust":0
+,"OwO Mullet":0,"OwO Yekzer":0 ,"OwO Cool Adam":0,"OwO Moist":0}
+
 ######################################################################################################################################
 
+
+
+
+
+
+
+###########Temporal OwO Event#########################################
+def CombatEvent() :
+    results = []
+    ToZero(players_new)
+    ToZero(players_final)
+    temp_results = {}
+    for k in range(0,999):  
+        headers = {'User-Agent': 'Mozilla/5.0'}        
+        request = Request('https://www.curseofaros.com/highscores.json?p='+str(k), headers=headers)
+        html = urlopen(request).read()       
+        data = html.decode("utf-8")        
+        fdata = json.loads(data)
+        for i in range(0,20): 
+            #check names get rank
+            player_name = fdata[i]["name"]
+            xp = fdata[i]["xp"]
+            
+            if player_name in players_int :
+                players_new[player_name] = xp
+            else :                
+                continue
+    for key in players_int:
+        players_final[key] = players_new[key]-players_int[key]
+
+    temp_results = {k: v for k, v in sorted(players_final.items(), key=lambda item: item[1],reverse=True)}
+    DictToList(temp_results,results)
+    for m in range(len(results)):
+        results[m] = '#'+str(m+1)+' - '+results[m]
+
+    return results
+        
+###########################################################################################################
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+def ToZero(dicc):
+    for key in dicc:
+        dicc[key]=0  
+  
+  
+  
+  
 def tabfill(xp): 
     if xp>4536153492:
         lvl=120
@@ -651,6 +726,43 @@ async def guildlb(ctx,skill_name,guildtag):
         members_msg0=""
         await ctx.send(embed=embeds_list[i])
     test_list_8.clear()
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+@client.command()
+async def test(ctx):
+
+await ctx.send(f"Getting Combat Grinders Leaderboard ... ")
+results_list = []
+results_list = CombatEvent()
+temp_msg = ""
+for i in range(len(results_list)):
+    temp_msg = temp_msg + results_list[i] + '\n'
+await ctx.send(f"{temp_msg}")
+results_list.clear()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 @client.command(name='guildlbT',aliases=['glbt','guildranks'])
 async def guildlbT(ctx,guildtag):

@@ -184,7 +184,7 @@ def CombatEvent() :
     DictToList(temp_results,results)
     for m in range(len(results)):
         results[m] = '#'+str(m+1)+' - '+results[m]
-    results.append(str(total_guild_xp))
+    results.append(total_guild_xp)
 
     return results
         

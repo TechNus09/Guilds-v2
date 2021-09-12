@@ -127,7 +127,7 @@ players_int = {
 ,"OwO Heartman":233269600,"OwO Doony":129127527,"OwO Messwithme":526312899,"OwO Stoned":70877064,"OwO DaveDust":1200928774
 ,"OwO Mullet":215590742,"OwO Yekzer":291112988 ,"OwO Cool Adam":162851572,"OwO Moist":656572649,"OwO Avi": 98036087
 ,"Father Skill":55843584,"OwO AcePar":141754466,"OwO DirtyShots":567018884,"OwO KcAlex": 578101996,"OwO Vick Vega":24455297
-,"OwO TheWitcher":859797353,"OwO h0lka":679909289}
+,"OwO TheWitcher":859797353,"OwO h0lka":679909289,"l Derek l":101643129 }
 
 players_new = { 
 "OwO DarkSecret":0,"OwO TheDuck":0,"OwO Tantrid":0,"OwO Bat Orb":0,"OwO TechNus09":0
@@ -135,7 +135,7 @@ players_new = {
 ,"OwO Heartman":0,"OwO Doony":0,"OwO Messwithme":0,"OwO Stoned":0,"OwO DaveDust":0
 ,"OwO Mullet":0,"OwO Yekzer":0 ,"OwO Cool Adam":0,"OwO Moist":0,"OwO Avi":0
 ,"Father Skill":0,"OwO AcePar":0,"OwO DirtyShots":0,"OwO KcAlex":0,"OwO Vick Vega":0
-,"OwO TheWitcher":0,"OwO h0lka":0}
+,"OwO TheWitcher":0,"OwO h0lka":0,"l Derek l":0}
 
 
 players_final = { 
@@ -144,7 +144,7 @@ players_final = {
 ,"OwO Heartman":0,"OwO Doony":0,"OwO Messwithme":0,"OwO Stoned":0,"OwO DaveDust":0
 ,"OwO Mullet":0,"OwO Yekzer":0 ,"OwO Cool Adam":0,"OwO Moist":0,"OwO Avi":0
 ,"Father Skill":0,"OwO AcePar":0,"OwO DirtyShots":0,"OwO KcAlex":0,"OwO Vick Vega":0
-,"OwO TheWitcher":0,"OwO h0lka":0}
+,"OwO TheWitcher":0,"OwO h0lka":0,"l Derek l":0}
 
 ######################################################################################################################################
 

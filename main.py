@@ -161,7 +161,7 @@ def CombatEvent() :
     ToZero(players_new)
     ToZero(players_final)
     temp_results = {}
-    for k in range(0,999):  
+    for k in range(0,1000):  
         headers = {'User-Agent': 'Mozilla/5.0'}        
         request = Request('https://www.curseofaros.com/highscores.json?p='+str(k), headers=headers)
         html = urlopen(request).read()       
@@ -258,7 +258,7 @@ def searchtag(skill_name,guildtag):
     guildreg_names = {}
     guildreg_ranks = {}
     
-    for k in range(0,999):  
+    for k in range(0,1000):  
         url='https://www.curseofaros.com/highscores'
         headers = {'User-Agent': 'Mozilla/5.0'}        
         request = Request(url+skill_name+'.json?p='+str(k), headers=headers)
@@ -302,7 +302,7 @@ def searchtagtotal(guildtag):
 
     
     for m in range(7):
-        for k in range(0,999):  
+        for k in range(0,1000):  
             url='https://www.curseofaros.com/highscores'
             headers = {'User-Agent': 'Mozilla/5.0'}        
             request = Request(url+skill[m]+'.json?p='+str(k), headers=headers)

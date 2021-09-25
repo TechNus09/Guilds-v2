@@ -383,7 +383,7 @@ def searchTotal():
     list_guilds_total_stred = []
     dd_test = ResetDict(guilds_counter_int)
     for m in range(0,7):
-        for k in range(0,250):  
+        for k in range(0,1000):  
             url='https://www.curseofaros.com/highscores'
             headers = {'User-Agent': 'Mozilla/5.0'}        
             request = Request(url+skill[m]+'.json?p='+str(k), headers=headers)

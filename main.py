@@ -640,7 +640,7 @@ async def total(ctx,rank):
     else:
         await ctx.send("Fetching Data ... ")
         test_list_0 = searchTotal()
-        embedVar0 = d.Embed(title="Top Guilds: Total XP (5,000)", color=0x6600ff)
+        embedVar0 = d.Embed(title="Top Guilds: Total XP (20,000)", color=0x6600ff)
         for i in range(int(rank)):
             embedVar0.add_field(name=rankk(i+1), value= test_list_0[i] , inline=False)
         await ctx.send(embed=embedVar0)

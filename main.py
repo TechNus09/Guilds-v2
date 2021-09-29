@@ -913,7 +913,7 @@ async def help(ctx):
     embedVar9.add_field(name="!all or !overall or !ranking", value= "Show an Overall Leaderboard (From Top 20,000 players)" , inline=False)
     embedVar9.add_field(name="!guildlb or !glb or !guildboard", value= "Show The Leaderboard of a Guild in a Skill (From Top 20,000 players)\n !guildlb {skill name} {guild tag}" , inline=False)
     embedVar9.add_field(name="!guildlbT or !glbT or !guildboardT", value= "Show The Leaderboard of a Guild in Total XP (From Top 20,000 players)\n !guildlbT {guild tag}" , inline=False)
-    embedVar9.add_field(name="!guildcount or !gc or !counter or !howmany or !hm", value= "Show The Members of a Guilds in a Certain Range \n !counter {guild tag} {Search Range}" , inline=False)
+    embedVar9.add_field(name="!guildcount or !gc or !count or !howmany or !hm", value= "Show The Members of a Guilds in a Certain Range \n !counter {guild tag} {Search Range}" , inline=False)
     embedVar9.add_field(name="!date", value= "Show Today Date" , inline=False)
     embedVar9.add_field(name="!help or !help? or !helpme or !commands?", value= "Show  This Menu" , inline=False)
     embedVar9.add_field(name="!test", value= "Test The Current Command In Developement" , inline=False)

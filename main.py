@@ -9,6 +9,8 @@ from datetime import date as dt
 from urllib.request import Request, urlopen
 import json
 
+##############################################################################Bot_Resources######################################################################################
+
 skill = ['','-mining', '-smithing', '-woodcutting', '-crafting', '-fishing', '-cooking']
 skills = ['combat','mining', 'smithing', 'woodcutting', 'crafting', 'fishing', 'cooking','total']
 
@@ -121,32 +123,9 @@ lvldef = [46, 53, 60, 70, 80, 92, 106, 121, 140, 160, 184, 212, 243, 280, 321, 3
 48426151, 55627040, 63898689, 73400320, 84314826, 96852302, 111254081, 127797379, 146800640, 168629653, 193704605, 222508162, 255594759, 293601280, 337259307, 387409211, 445016324, 
 511189519, 587202560]
 
-players_int = { 
-"OwO DarkSecret":366325723,"OwO TheDuck":2188464625,"OwO Tantrid":1079995424,"OwO Bat Orb":824520444,"OwO TechNus09":149194349
-,"OwO Maddy":191391070,"OwO Dryness":863940555,"OwO Spooniest":733000732,"OwO DigiPope":374092835,"OwO Durps":20455489
-,"OwO Heartman":233269600,"OwO Doony":129127527,"OwO Messwithme":526312899,"OwO Stoned":70877064,"OwO DaveDust":1200928774
-,"OwO Mullet":215590742,"OwO Yekzer":291112988 ,"OwO Cool Adam":162851572,"OwO Moist":656572649,"OwO Avi": 98036087
-,"Father Skill":55843584,"OwO AcePar":141754466,"OwO DirtyShots":567018884,"OwO KcAlex": 578101996,"OwO Vick Vega":24455297
-,"OwO TheWitcher":859797353,"OwO h0lka":679909289,"OwO l Derek l":101643129 }
-
-players_new = { 
-"OwO DarkSecret":0,"OwO TheDuck":0,"OwO Tantrid":0,"OwO Bat Orb":0,"OwO TechNus09":0
-,"OwO Maddy":0,"OwO Dryness":0,"OwO Spooniest":0,"OwO DigiPope":0,"OwO Durps":0
-,"OwO Heartman":0,"OwO Doony":0,"OwO Messwithme":0,"OwO Stoned":0,"OwO DaveDust":0
-,"OwO Mullet":0,"OwO Yekzer":0 ,"OwO Cool Adam":0,"OwO Moist":0,"OwO Avi":0
-,"Father Skill":0,"OwO AcePar":0,"OwO DirtyShots":0,"OwO KcAlex":0,"OwO Vick Vega":0
-,"OwO TheWitcher":0,"OwO h0lka":0,"OwO l Derek l":0}
 
 
-players_final = { 
-"OwO DarkSecret":0,"OwO TheDuck":0,"OwO Tantrid":0,"OwO Bat Orb":0,"OwO TechNus09":0
-,"OwO Maddy":0,"OwO Dryness":0,"OwO Spooniest":0,"OwO DigiPope":0,"OwO Durps":0
-,"OwO Heartman":0,"OwO Doony":0,"OwO Messwithme":0,"OwO Stoned":0,"OwO DaveDust":0
-,"OwO Mullet":0,"OwO Yekzer":0 ,"OwO Cool Adam":0,"OwO Moist":0,"OwO Avi":0
-,"Father Skill":0,"OwO AcePar":0,"OwO DirtyShots":0,"OwO KcAlex":0,"OwO Vick Vega":0
-,"OwO TheWitcher":0,"OwO h0lka":0,"OwO l Derek l":0}
-
-######################################################################################################################################
+###############################################################################################################################################################################
 
 
 
@@ -188,7 +167,7 @@ def CombatEvent() :
 
     return results
         
-###########################################################################################################
+##########################################################################################################################################################################
         
         
         
@@ -197,7 +176,7 @@ def CombatEvent() :
         
         
         
-        
+######################################################################Bot_Funtctions##################################################################################        
         
         
         
@@ -493,7 +472,7 @@ def SearchMembers(guildtag,rnk):
                         continue
     return members_names
 
-############################################################################
+#############################################################################Bot_Main_Code##############################################################################
 
 
 client = d.Client()
@@ -822,7 +801,7 @@ async def guildcount(ctx,guildtag,rank):
     await ctx.send(embed=embedVar8)
     members_msg = ""
     members_msg0 = ""
-    ##############################################################################
+    ###############################Guilds_Less_Than_65_members###############################################
     if (counter_int<=65):
         if (guild_name == "OWO"):
             embed = d.Embed(title="Legends", inline=False)
@@ -832,7 +811,7 @@ async def guildcount(ctx,guildtag,rank):
             members_msg = members_msg + y[i] + '\n'
         embed.add_field(name="\u200b", value= members_msg , inline=False)
         await ctx.send(embed=embed)      
-    ##############################################################################
+    ###############################Guilds_Between_65_And_325_members###############################################
     elif ((counter_int>65) and (counter_int<325)):
         fields_int =  math.ceil(counter_int / 65)
         loop_list = []
@@ -850,7 +829,7 @@ async def guildcount(ctx,guildtag,rank):
             embed.add_field(name='\u200b', value= members_msg0 , inline=False)
             members_msg0=""
         await ctx.send(embed=embed)
-    ##############################################################################
+    ##################################Guilds_Between_325_And_1625_members############################################
     elif ((counter_int>=325) and (counter_int<1625)):
         embed0 = d.Embed(title="\u200b", color=0x6600ff)
         embed1 = d.Embed(title="\u200b", color=0x6600ff)
